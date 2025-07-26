@@ -102,6 +102,15 @@ init-nx: # Initialize Nx workspace
 
 setup-ai: # Install AI/ML dependencies (PyTorch, Transformers, etc.)
     @echo "🤖 Installing AI/ML dependencies..."
+    @if ! command -v uv >/dev/null 2>&1; then \
+        echo "'uv' not found. Installing with pipx..."; \
+        if command -v pipx >/dev/null 2>&1; then \
+            pipx install uv; \
+        else \
+            echo "'pipx' not found. Installing 'uv' with pip..."; \
+            python3 -m pip install --user uv; \
+        fi \
+    fi
     @uv sync --group ai
 
 setup-cloud: # Install cloud and infrastructure dependencies
