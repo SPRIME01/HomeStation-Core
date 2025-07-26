@@ -19,9 +19,12 @@ def init_python_env(args):
     print(f"Monorepo root: {args.monorepo_root}")
     print(f"Profile: {args.profile}")
 
-    # Create virtual environment
+    # Create virtual environment if it does not exist
     venv_path = Path(args.monorepo_root) / ".venv"
-    subprocess.run([sys.executable, "-m", "venv", str(venv_path)], check=True)
+    if venv_path.exists():
+        print(f"Virtual environment already exists at {venv_path}. Skipping creation.")
+    else:
+        subprocess.run([sys.executable, "-m", "venv", str(venv_path)], check=True)
 
     # Install dependencies based on profile
     if args.profile == "core":
