@@ -44,8 +44,7 @@ def init_nx(args):
     """Initialize Nx workspace."""
     print(f"Initializing Nx workspace with plugin version {args.nx_python_plugin_version}")
     # Initialize Nx workspace here
-    print("Nx workspace initialized successfully!")
-
+    raise NotImplementedError("Nx workspace initialization is not yet implemented.")
     def install_custom_py_generator(args):
         """Install custom Python generators."""
         print(f"Installing custom Python generator: {args.custom_py_gen_plugin_name}")
