@@ -31,17 +31,13 @@ HomeStation_Core/
 
 ## Running the API
 
-Install dependencies and start the development server:
+Install dependencies and start the development server using the provided
+Justfile:
 
 ```bash
-# Install Node.js dependencies
 pnpm install
-
-# Install Python dependencies with uv
-uv sync --all-extras
-
-# Start the development server
-uv run uvicorn main:app --reload --app-dir apps/core-api
+uv sync --dev
+just dev
 ```
 
 The API will be available at `http://localhost:8000/`.  A basic health
@@ -49,13 +45,13 @@ endpoint is defined in `apps/core-api/main.py`.
 
 ## Linting, Formatting and Tests
 
-Run the following commands from the repository root (after activating the uv environment):
+Run the following commands from the repository root:
 
-* `uv run ruff check libs apps tools` – static analysis with Ruff
-* `uv run mypy libs apps tools` – type checking with MyPy
-* `uv run ruff format libs apps tools` – fix formatting using Ruff
-* `uv run pytest -q` – run all Python tests with PyTest
-* `uv run python tools/scripts/validate_hexagon.py` – ensure hexagonal layering rules are respected
+* `just lint` – static analysis with Ruff and type checking with MyPy.
+* `just format` – fix formatting using Ruff.
+* `just test` – run all Python tests with PyTest.
+* `just validate` – ensure that the hexagonal layering rules are respected (no
+  forbidden imports across layers).
 
 ## Extending This Project
 
