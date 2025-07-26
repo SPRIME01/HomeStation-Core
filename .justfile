@@ -226,6 +226,10 @@ context-new CTX: # Create DDD context with hexagonal architecture
 
 service-split CTX TRANSPORT='fastapi': # Extract context to microservice
     @echo "🔧 Extracting context '{{CTX}}' to microservice with {{TRANSPORT}} transport..."
+    @if echo "{{CTX}}" | grep -q '[/.\\]'; then \
+        echo "❌ Invalid context name: {{CTX}}. Context names cannot contain /, \\, or ."; \
+        exit 1; \
+    fi
     @echo "📋 Checking if context exists..."
     @if [ ! -d "libs/{{CTX}}" ]; then \
         echo "❌ Context {{CTX}} not found. Run 'just context-new CTX={{CTX}}' first."; \
@@ -241,21 +245,6 @@ service-split CTX TRANSPORT='fastapi': # Extract context to microservice
     @just update-service-tags CTX={{CTX}} DEPLOYABLE=true
     @echo "✅ Context {{CTX}} extracted to microservice at apps/{{CTX}}-svc/"
     @echo "💡 Deploy with: just deploy-service CTX={{CTX}}"
-
-service-merge CTX: # Merge microservice back to monolith
-    @echo "🔄 Merging microservice '{{CTX}}' back to monolith..."
-    @echo "📋 Checking if service exists..."
-    @if [ ! -d "apps/{{CTX}}-svc" ]; then \
-        echo "❌ Service {{CTX}}-svc not found. Nothing to merge."; \
-        exit 1; \
-    fi
-    @echo "🗑️ Removing service application..."
-    @rm -rf "apps/{{CTX}}-svc"
-    @echo "🏷️ Updating deployment tags..."
-    @just update-service-tags CTX={{CTX}} DEPLOYABLE=false
-    @echo "✅ Service {{CTX}} merged back to monolith."
-    @echo "💡 Context libs/{{CTX}} remains unchanged - zero code impact!"
-
 service-status: # Show deployment status of all contexts
     @echo "📊 Context Deployment Status:"
     @echo "════════════════════════════════════════════════════════════════"
