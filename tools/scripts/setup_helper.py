@@ -6,10 +6,11 @@ managing contexts, and handling service architecture operations.
 
 import argparse
 import json
-import os
+
 import subprocess
 import sys
 from pathlib import Path
+import shutil
 
 
 def init_python_env(args):
@@ -45,12 +46,26 @@ def init_nx(args):
     # Initialize Nx workspace here
     print("Nx workspace initialized successfully!")
 
-
-def install_custom_py_generator(args):
-    """Install custom Python generators."""
-    print(f"Installing custom Python generator: {args.custom_py_gen_plugin_name}")
-    # Install custom Python generator here
-    print("Custom Python generator installed successfully!")
+    def install_custom_py_generator(args):
+        """Install custom Python generators."""
+        print(f"Installing custom Python generator: {args.custom_py_gen_plugin_name}")
+        # Try pnpm first, fallback to npm if not available
+        install_cmds = [
+            ["pnpm", "add", "-D", args.custom_py_gen_plugin_name],
+            ["npm", "install", "--save-dev", args.custom_py_gen_plugin_name],
+        ]
+        for cmd in install_cmds:
+            try:
+            subprocess.run(cmd, check=True)
+            print("Custom Python generator installed successfully!")
+            return
+            except FileNotFoundError:
+                continue  # Try next package manager
+            except subprocess.CalledProcessError as e:
+                print(f"Error installing with {' '.join(cmd)}: {e}", file=sys.stderr)
+                sys.exit(1)
+        print("Neither pnpm nor npm was found. Please install one of them.", file=sys.stderr)
+        sys.exit(1)
 
 
 def install_pre_commit(args):
@@ -63,7 +78,7 @@ def install_pre_commit(args):
 def update_service_tags(args):
     """Update deployable tags for a context."""
     print(f"Updating deployable tags for context {args.ctx} to {args.deployable}")
-
+    _print_update_service_tags(args)
     # Update project.json file for the context
     # Securely construct path to project.json to prevent path traversal
     libs_dir = Path("libs").resolve()
