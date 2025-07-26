@@ -87,13 +87,16 @@ setup-full: setup setup-ai setup-cloud setup-analytics setup-dev setup-database 
 # Core Python environment (lightweight)
 init-python-env-core:
     @echo "🐍 Setting up core Python environment..."
-    @python3 tools/scripts/setup_helper.py init_python_env --python-version={{PYTHON_VERSION}} --root-pyproject-toml={{ROOT_PYPROJECT_TOML}} --monorepo-root={{MONOREPO_ROOT}} --profile=core
+    @python3 tools/scripts/setup_helper.py init_python_env \
+        --python-version="{{PYTHON_VERSION}}" \
+        --root-pyproject-toml="{{ROOT_PYPROJECT_TOML}}" \
+        --monorepo-root="{{MONOREPO_ROOT}}" \
+        --profile=core
 
 # Full Python environment (all dependencies)
 init-python-env-full:
     @echo "🐍 Setting up full Python environment with all dependencies..."
     @python3 tools/scripts/setup_helper.py init_python_env --python-version={{PYTHON_VERSION}} --root-pyproject-toml={{ROOT_PYPROJECT_TOML}} --monorepo-root={{MONOREPO_ROOT}} --profile=full
-
 init-nx: # Initialize Nx workspace
     @python3 tools/scripts/setup_helper.py init_nx --nx-python-plugin-version={{NX_PYTHON_PLUGIN_VERSION}}
 
