@@ -42,8 +42,8 @@ DOMAINS := ""
 
 # Root paths
 MONOREPO_ROOT := "."
-PYTHON_VENV_PATH := MONOREPO_ROOT + "/.venv"
-ROOT_PYPROJECT_TOML := MONOREPO_ROOT + "/pyproject.toml"
+PYTHON_VENV_PATH := "{{MONOREPO_ROOT}}/.venv"
+ROOT_PYPROJECT_TOML := "{{MONOREPO_ROOT}}/pyproject.toml"
 
 # ==============================================================================
 # Help System - Auto-generated from target comments

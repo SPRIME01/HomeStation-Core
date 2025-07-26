@@ -74,9 +74,874 @@ def install_pre_commit(args):
         # Check if pre-commit is installed, install if not
         try:
             subprocess.run(["pre-commit", "--version"], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(["pre-commit", "--version"], check=True, stdout=subprocess.DEVNULL)
         except (FileNotFoundError, subprocess.CalledProcessError):
             print("pre-commit not found, installing via uv...")
-            subprocess.run(["uv", "pip", "install", "pre-commit"], check=True)
+    print(f"Updating deployable tags for context {args.ctx} to {args.deployable}")
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        update_project_tags(project_data, args.deployable)
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
+-    _print_update_service_tags(args)
+    # Update project.json file for the context
+    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    if project_json_path.exists():
+        try:
+            with open(project_json_path, "r") as f:
+                project_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in {project_json_path}: {e}")
+            sys.exit(1)
+        except IOError as e:
+            print(f"Error reading {project_json_path}: {e}")
+            sys.exit(1)
+
+        # Update tags
+        if "tags" not in project_data:
+            project_data["tags"] = []
+        project_data["tags"] = [tag for tag in project_data["tags"]
+                                if not tag.startswith("deployable:")]
+        project_data["tags"].append(f"deployable:{args.deployable}")
+
+        # Write back atomically
+        try:
+            temp_path = project_json_path.with_suffix(".tmp")
+            with open(temp_path, "w") as f:
+                json.dump(project_data, f, indent=2)
+                f.write("\n")
+            temp_path.replace(project_json_path)
+        except IOError as e:
+            print(f"Error writing {project_json_path}: {e}")
+            sys.exit(1)
+
+        print(f"Deployable tags updated for context {args.ctx}")
+    else:
+        print(f"Project file not found for context {args.ctx}")
+        sys.exit(1)
 
         # Install the git hooks
         subprocess.run(["pre-commit", "install"], check=True)
