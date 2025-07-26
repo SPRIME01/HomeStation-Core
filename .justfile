@@ -449,8 +449,13 @@ tree: # Pretty-print current workspace layout
 
 clean: # Clean build artifacts and caches (use with caution)
     @echo "🗑️ Cleaning Nx cache, node_modules, and Python environments..."
-    PROJECT_ROOT="$(git rev-parse --show-toplevel)"
-    cd "$PROJECT_ROOT"
+    if git rev-parse --show-toplevel >/dev/null 2>&1; then \
+        PROJECT_ROOT="$(git rev-parse --show-toplevel)"; \
+    else \
+        echo "⚠️ Not inside a git repository. Using current directory as project root."; \
+        PROJECT_ROOT="$$PWD"; \
+    fi; \
+    cd "$$PROJECT_ROOT"; \
     {{NX}} reset
     rm -rf "$PROJECT_ROOT/node_modules" "$PROJECT_ROOT/.venv"
     find "$PROJECT_ROOT" -name ".nx" -type d -exec rm -rf {} + 2>/dev/null || true
