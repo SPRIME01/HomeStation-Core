@@ -83,7 +83,8 @@ def update_service_tags(args):
 
         print(f"Deployable tags updated for context {args.ctx}")
     else:
-        print(f"Project file not found for context {args.ctx}")
+        print(f"Project file not found for context {args.ctx}", file=sys.stderr)
+        sys.exit(1)
 
 
 def main():
