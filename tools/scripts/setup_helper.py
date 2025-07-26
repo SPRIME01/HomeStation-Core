@@ -30,12 +30,12 @@ def init_python_env(args):
     # Install dependencies based on profile
     if args.profile == "core":
         print("Installing core dependencies...")
-        # TODO: Install core dependencies here
-        raise NotImplementedError("Core dependency installation is not yet implemented.")
+        # Install core dependencies using uv
+        subprocess.run(["uv", "pip", "install", "-e", "."], check=True)
     elif args.profile == "full":
         print("Installing full dependencies...")
-        # TODO: Install full dependencies here
-        raise NotImplementedError("Full dependency installation is not yet implemented.")
+        # Install full dependencies including dev dependencies
+        subprocess.run(["uv", "pip", "install", "-e", ".[dev]"], check=True)
 
     print("Python environment initialized successfully!")
 
@@ -43,41 +43,73 @@ def init_python_env(args):
 def init_nx(args):
     """Initialize Nx workspace."""
     print(f"Initializing Nx workspace with plugin version {args.nx_python_plugin_version}")
-    # Initialize Nx workspace here
-    raise NotImplementedError("Nx workspace initialization is not yet implemented.")
-    def install_custom_py_generator(args):
-        """Install custom Python generators."""
-        print(f"Installing custom Python generator: {args.custom_py_gen_plugin_name}")
-        # Try pnpm first, fallback to npm if not available
-        install_cmds = [
-            ["pnpm", "add", "-D", args.custom_py_gen_plugin_name],
-            ["npm", "install", "--save-dev", args.custom_py_gen_plugin_name],
-        ]
-        for cmd in install_cmds:
-            try:
-            subprocess.run(cmd, check=True)
-            print("Custom Python generator installed successfully!")
-            return
-            except FileNotFoundError:
-                continue  # Try next package manager
-            except subprocess.CalledProcessError as e:
-                print(f"Error installing with {' '.join(cmd)}: {e}", file=sys.stderr)
-                sys.exit(1)
-        print("Neither pnpm nor npm was found. Please install one of them.", file=sys.stderr)
+    try:
+        # Initialize Nx workspace if nx.json does not exist
+        if not Path("nx.json").exists():
+            print("Running: npx nx init")
+            subprocess.run(["npx", "nx", "init"], check=True)
+        else:
+            print("Nx workspace already initialized.")
+
+        # Install the Python plugin at the specified version
+        plugin_pkg = f"@nx-python/nx-python@{args.nx_python_plugin_version}"
+        print(f"Installing Nx Python plugin: {plugin_pkg}")
+        subprocess.run(["pnpm", "add", "-D", plugin_pkg], check=True)
+        print("Nx Python plugin installed successfully!")
+    except FileNotFoundError as e:
+        print(f"Error: Required tool not found: {e}", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"Error running command: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
         sys.exit(1)
 
 
 def install_pre_commit(args):
     """Install git pre-commit hooks."""
     print("Installing git pre-commit hooks...")
-    # Install pre-commit hooks here
-    print("Git pre-commit hooks installed successfully!")
+    try:
+        # Check if pre-commit is installed, install if not
+        try:
+            subprocess.run(["pre-commit", "--version"], check=True, stdout=subprocess.DEVNULL)
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            print("pre-commit not found, installing via uv...")
+            subprocess.run(["uv", "pip", "install", "pre-commit"], check=True)
+
+        # Install the git hooks
+        subprocess.run(["pre-commit", "install"], check=True)
+        print("Git pre-commit hooks installed successfully!")
+    except FileNotFoundError as e:
+        print(f"Error: Required tool not found: {e}", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"Error running command: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def install_custom_py_generator(args):
+    """Install custom Python generators."""
+    print(f"Installing custom Python generator: {args.custom_py_gen_plugin_name}")
+    try:
+        # Try to install the custom Python generator plugin
+        subprocess.run(["pnpm", "add", "-D", args.custom_py_gen_plugin_name], check=True)
+        print("Custom Python generator installed successfully!")
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing custom Python generator: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 def update_service_tags(args):
     """Update deployable tags for a context."""
     print(f"Updating deployable tags for context {args.ctx} to {args.deployable}")
-    _print_update_service_tags(args)
     # Update project.json file for the context
     # Securely construct path to project.json to prevent path traversal
     libs_dir = Path("libs").resolve()
