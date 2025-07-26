@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      UV_TOKEN: ${{ secrets.UV_TOKEN }}
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      PYTHONPATH: '.'
+    steps:
+      - uses: actions/checkout@v3
+
+      # Set up Node and pnpm for Nx
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # Set up Python and uv
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install Node dependencies
+        run: pnpm install
+
+      - name: Install Python dependencies
+        run: uv sync --dev
+
+      - name: Lint & type check
+        run: |
+          pnpm nx run-many --target=lint --all --parallel
+          pnpm nx run-many --target=typecheck --all --parallel
+
+      - name: Run tests
+        run: pnpm nx run-many --target=test --all --parallel
+
+      - name: Validate hexagon architecture
+        run: just validate
+
+      # Build Docker images for all services (if present)
+      - name: Build Docker images
+        run: pnpm nx run-many --target=docker --all --parallel --if-present
+
+      # Train ML models for all services
+      - name: Train models
+        run: pnpm nx run-many --target=train --all --parallel --if-present
+
+      # Evaluate ML models for all services
+      - name: Evaluate models
+        run: pnpm nx run-many --target=evaluate --all --parallel --if-present
+
+      # Register trained models
+      - name: Register models
+        run: pnpm nx run-many --target=register --all --parallel --if-present
+
+      # Promote models to production
+      - name: Promote models
+        run: pnpm nx run-many --target=promote --all --parallel --if-present

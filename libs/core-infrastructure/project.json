@@ -1,0 +1,29 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/core-infrastructure/src",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ruff libs/core-infrastructure/src"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "mypy libs/core-infrastructure/src"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pytest libs/core-infrastructure/src"
+      }
+    }
+  },
+  "tags": [
+    "core",
+    "layer:infrastructure"
+  ]
+}

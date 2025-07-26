@@ -1,0 +1,7 @@
+- name: Deploy core service
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Print deployment message
+      debug:
+        msg: "Deploying core service via Ansible"

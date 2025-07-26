@@ -1,0 +1,9 @@
+aggregates:
+  core:
+    fields:
+      id: int
+      name: str
+ports:
+  core_repository:
+    methods:
+      get_all: []

@@ -1,0 +1,16 @@
+{
+  "name": "core-e2e",
+  "root": "apps/core-e2e",
+  "sourceRoot": "apps/core-e2e/tests",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pytest apps/core-e2e/tests",
+        "cwd": "."
+      }
+    }
+  },
+  "tags": ["layer:e2e", "scope:core"]
+}
