@@ -26,12 +26,12 @@ def init_python_env(args):
     # Install dependencies based on profile
     if args.profile == "core":
         print("Installing core dependencies...")
-        # Install core dependencies here
-        pass
+        # TODO: Install core dependencies here
+        raise NotImplementedError("Core dependency installation is not yet implemented.")
     elif args.profile == "full":
         print("Installing full dependencies...")
-        # Install full dependencies here
-        pass
+        # TODO: Install full dependencies here
+        raise NotImplementedError("Full dependency installation is not yet implemented.")
 
     print("Python environment initialized successfully!")
 
