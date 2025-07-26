@@ -472,58 +472,65 @@ clean: # Clean build artifacts and caches (use with caution)
 create-service-app CTX TRANSPORT: # Internal: Create service application structure
     @echo "🏗️ Creating service application for {{CTX}}..."
     @mkdir -p "apps/{{CTX}}-svc/src"
-    @echo '"""' > "apps/{{CTX}}-svc/src/main.py"
-    @echo "{{CTX}} Microservice - Auto-generated service wrapper" >> "apps/{{CTX}}-svc/src/main.py"
-    @echo "Exposes libs/{{CTX}} domain logic via {{TRANSPORT}} transport" >> "apps/{{CTX}}-svc/src/main.py"
-    @echo '"""' >> "apps/{{CTX}}-svc/src/main.py"
-    @if [ "{{TRANSPORT}}" = "fastapi" ]; then \
-        echo "from fastapi import FastAPI, Depends" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "from libs.{{CTX}}.application.{{CTX}}_service import $$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}')Service" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "from libs.{{CTX}}.adapters.memory_adapter import Memory$$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}')Adapter" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "app = FastAPI(" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "    title=\"$$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}') Service\"," >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo ")" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "if __name__ == \"__main__\":" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "    import uvicorn" >> "apps/{{CTX}}-svc/src/main.py"; \
-        echo "    uvicorn.run(app, host=\"0.0.0.0\", port=8000)" >> "apps/{{CTX}}-svc/src/main.py"; \
-    fi
+    @cat <<EOF > "apps/{{CTX}}-svc/src/main.py"
+"""
+{{CTX}} Microservice - Auto-generated service wrapper
+Exposes libs/{{CTX}} domain logic via {{TRANSPORT}} transport
+"""
+
+{% if TRANSPORT == "fastapi" %}
+from fastapi import FastAPI, Depends
+from libs.{{CTX}}.application.{{CTX}}_service import $$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}')Service
+from libs.{{CTX}}.adapters.memory_adapter import Memory$$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}')Adapter
+
+app = FastAPI(
+    title="$$(echo {{CTX}} | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}') Service",
+)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+{% endif %}
+EOF
     @echo "✅ Service application structure created for {{CTX}}."
 
 create-service-container CTX: # Internal: Generate Docker configuration
     @echo "🐳 Creating Docker configuration for {{CTX}}..."
     @mkdir -p "apps/{{CTX}}-svc"
-    @echo "FROM python:3.12-slim" > "apps/{{CTX}}-svc/Dockerfile"
-    @echo "WORKDIR /app" >> "apps/{{CTX}}-svc/Dockerfile"
-    @echo "COPY . ." >> "apps/{{CTX}}-svc/Dockerfile"
-    @echo "RUN pip install -e ." >> "apps/{{CTX}}-svc/Dockerfile"
-    @echo "EXPOSE 8000" >> "apps/{{CTX}}-svc/Dockerfile"
-    @echo "CMD [\"uvicorn\", \"src.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]" >> "apps/{{CTX}}-svc/Dockerfile"
+    @cat <<EOF > "apps/{{CTX}}-svc/Dockerfile"
+FROM python:3.12-slim
+WORKDIR /app
+COPY . .
+RUN pip install -e .
+EXPOSE 8000
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+EOF
     @echo "✅ Docker configuration created for {{CTX}}."
 
 create-service-k8s CTX: # Internal: Generate Kubernetes manifests
     @echo "☸️ Creating Kubernetes manifests for {{CTX}}..."
     @mkdir -p "apps/{{CTX}}-svc/k8s"
-    @echo "apiVersion: apps/v1" > "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "kind: Deployment" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "metadata:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "  name: {{CTX}}-svc" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "spec:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "  replicas: 1" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "  selector:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "    matchLabels:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "      app: {{CTX}}-svc" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "  template:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "    metadata:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "      labels:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "        app: {{CTX}}-svc" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "    spec:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "      containers:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "      - name: {{CTX}}-svc" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "        image: {{CONTAINER_REGISTRY}}/{{CTX}}-svc:latest" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "        ports:" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
-    @echo "        - containerPort: 8000" >> "apps/{{CTX}}-svc/k8s/deployment.yaml"
+    @cat <<EOF > "apps/{{CTX}}-svc/k8s/deployment.yaml"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{CTX}}-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{CTX}}-svc
+  template:
+    metadata:
+      labels:
+        app: {{CTX}}-svc
+    spec:
+      containers:
+      - name: {{CTX}}-svc
+        image: {{CONTAINER_REGISTRY}}/{{CTX}}-svc:latest
+        ports:
+        - containerPort: 8000
+EOF
     @echo "✅ Kubernetes manifests created for {{CTX}}."
 
 update-service-tags CTX DEPLOYABLE: # Internal: Update deployable tags for a context
