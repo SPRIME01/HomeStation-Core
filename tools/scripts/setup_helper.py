@@ -62,7 +62,18 @@ def update_service_tags(args):
     print(f"Updating deployable tags for context {args.ctx} to {args.deployable}")
 
     # Update project.json file for the context
-    project_json_path = Path(f"libs/{args.ctx}/project.json")
+    # Securely construct path to project.json to prevent path traversal
+    libs_dir = Path("libs").resolve()
+    try:
+        project_dir = (libs_dir / args.ctx).resolve()
+        # In Python 3.9+, is_relative_to is available for this check
+        if not project_dir.is_relative_to(libs_dir):
+            raise ValueError("Path traversal detected.")
+    except (ValueError, TypeError) as e:
+        print(f"Error: Invalid context '{args.ctx}'. {e}", file=sys.stderr)
+        sys.exit(1)
+
+    project_json_path = project_dir / "project.json"
     if project_json_path.exists():
         with open(project_json_path, "r") as f:
             project_data = json.load(f)
