@@ -374,8 +374,8 @@ containerize PROJECT: # Build Docker image for project
 
 build-service-images: # Build Docker images for all deployable services
     @echo "🐳 Building Docker images for all deployable services..."
-    @find apps -name "*-svc" -type d -print0 | \
-        while IFS= read -r -d '' svc_path; do \
+    @find apps -name "*-svc" -type d | \
+        while IFS= read -r svc_path; do \
             svc=$$(printf '%s\n' "$$svc_path" | sed 's|apps/||g'); \
             echo "🔨 Building image for $$svc..."; \
             {{NX}} run "$$svc:docker" || echo "⚠️  Failed to build $$svc"; \
