@@ -28,10 +28,18 @@ doctor:
 
 # 3️⃣ Bootstrap secrets backend (HashiCorp Vault in K3s)
 vault_init:
-    kubectl -n vault rollout status deploy/vault
-    kubectl -n vault exec -it deploy/vault -- vault operator init -key-shares=1 -key-threshold=1 -format=json > vault-init.json
-    jq -r '.unseal_keys_b64[0]' vault-init.json | kubectl -n vault exec -it deploy/vault -- vault operator unseal -
+    kubectl -n vault wait --for=condition=ready pod/vault-0 --timeout=300s
+    kubectl -n vault exec -it vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > vault-init.json
+    jq -r '.unseal_keys_b64[0]' vault-init.json | kubectl -n vault exec -i vault-0 -- vault operator unseal -
     echo "Vault initialised & unsealed✅"
+
+# 3️⃣.1 Setup Vault admin users and policies
+vault_setup:
+    bash scripts/setup-vault.sh
+
+# 3️⃣.2 Setup Supabase secrets from .env
+supabase_secrets:
+    bash scripts/setup-supabase-secrets.sh
 
 # 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
 provision_core:
