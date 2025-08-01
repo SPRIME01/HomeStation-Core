@@ -1,0 +1,47 @@
+{
+  "nodes": {
+    "nx-homelab-plugin": {
+      "name": "nx-homelab-plugin",
+      "type": "lib",
+      "data": {
+        "root": "libs/nx-homelab-plugin",
+        "name": "nx-homelab-plugin",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@org/nx-homelab-plugin",
+            "packageMain": "src/index.js",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {
+          "lint": {
+            "executor": "nx:eslint",
+            "configurations": {},
+            "options": {},
+            "parallelism": true
+          },
+          "test": {
+            "executor": "nx:jest",
+            "configurations": {},
+            "options": {},
+            "parallelism": true
+          }
+        },
+        "projectType": "library",
+        "sourceRoot": "libs/nx-homelab-plugin/src",
+        "implicitDependencies": []
+      }
+    }
+  },
+  "externalNodes": {},
+  "dependencies": {
+    "nx-homelab-plugin": []
+  },
+  "version": "6.0",
+  "errors": [],
+  "computedAt": 1754067763584
+}

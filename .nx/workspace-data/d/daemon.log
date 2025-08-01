@@ -1,0 +1,71 @@
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.191Z - Started listening on: /tmp/b01ad3ab086eb05d74d0/d.sock
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.199Z - [WATCHER]: Subscribed to changes within: /home/prime/homelab (native)
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.204Z - Established a connection. Number of open connections: 1
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.205Z - Established a connection. Number of open connections: 2
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.210Z - Closed a connection. Number of open connections: 1
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.212Z - [REQUEST]: Client Request for Project Graph Received
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.259Z - Time taken for 'loadSpecifiedNxPlugins' 4.516470000000027ms
+Time for 'plugin worker 578589 code loading' 16.05744
+Time for 'plugin worker 578588 code loading' 16.029089999999997
+Time for 'plugin worker 578590 code loading' 15.672600000000003
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.783Z - Time taken for 'Load Nx Plugin: /home/prime/.volta/tools/image/packages/nx/lib/node_modules/nx/src/plugins/package-json' 566.56224ms
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.790Z - Time taken for 'Load Nx Plugin: /home/prime/.volta/tools/image/packages/nx/lib/node_modules/nx/src/plugins/project-json/build-nodes/project-json' 572.62635ms
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.855Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.855Z - [REQUEST]: 
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.855Z - [REQUEST]: 
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.859Z - No files changed, but no in-memory cached project graph found. Recomputing it...
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 0.5180399999999281
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.871Z - Time taken for 'loadDefaultNxPlugins' 640.3077000000001ms
+Time for 'nx/core/project-json:createNodes' 0.7145999999999049
+Time for 'nx/core/package-json:createNodes' 68.88149999999996
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:15.999Z - Time taken for 'build-project-configs' 89.83538999999996ms
+Time for 'build typescript dependencies' 3.828960000000052
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.009Z - Wrote project graph cache to /home/prime/homelab/.nx/workspace-data/project-graph.json
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.010Z - [SYNC]: collect registered sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.011Z - [REQUEST]: Responding to the client. project-graph
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.011Z - Done responding to the client project-graph
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.012Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 799. Response time: 1.
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.012Z - Time taken for 'total for creating and serializing project graph' 798.8273099999999ms
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:16.036Z - Closed a connection. Number of open connections: 0
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.829Z - Established a connection. Number of open connections: 1
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.831Z - Closed a connection. Number of open connections: 0
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.833Z - Established a connection. Number of open connections: 1
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.839Z - [REQUEST]: Client Request for Project Graph Received
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.840Z - Reusing in-memory cached project graph because no files changed.
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.840Z - [REQUEST]: Responding to the client. project-graph
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.840Z - Done responding to the client project-graph
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.840Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.840Z - Time taken for 'total for creating and serializing project graph' 0.9423900000001595ms
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:33.892Z - Closed a connection. Number of open connections: 0
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.134Z - [WATCHER]: justfile was modified
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.136Z - [WATCHER]: Processing file changes in outputs
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.238Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.240Z - [REQUEST]: justfile
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.240Z - [REQUEST]: 
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 0.34667999999510357
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.263Z - Time taken for 'hash changed files from watcher' 0.3620699999955832ms
+Time for 'nx/core/project-json:createNodes' 0.5341499999994994
+Time for 'nx/core/package-json:createNodes' 12.27140999999392
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.305Z - Time taken for 'build-project-configs' 28.323539999997593ms
+Time for 'build typescript dependencies' 0.15831000000616768
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.308Z - Wrote project graph cache to /home/prime/homelab/.nx/workspace-data/project-graph.json
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.308Z - [SYNC]: collect registered sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.309Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.309Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T16:50:54.309Z - Time taken for 'total execution time for createProjectGraph()' 17.603009999998903ms
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.368Z - [WATCHER]: Processing file changes in outputs
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.370Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.572Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.572Z - [REQUEST]: infra/argocd/apps/README.md,justfile,infra/argocd/bootstrap.yaml
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.572Z - [REQUEST]: 
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 0.19377000001259148
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.576Z - Time taken for 'hash changed files from watcher' 0.6106500000460073ms
+Time for 'nx/core/project-json:createNodes' 0.7229700000025332
+Time for 'nx/core/package-json:createNodes' 3.047039999975823
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.582Z - Time taken for 'build-project-configs' 6.911640000063926ms
+Time for 'build typescript dependencies' 0.0179100000532344
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.585Z - Wrote project graph cache to /home/prime/homelab/.nx/workspace-data/project-graph.json
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.586Z - [SYNC]: collect registered sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.586Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.586Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.3.10 Daemon Server] - 2025-08-01T17:02:43.587Z - Time taken for 'total execution time for createProjectGraph()' 2.5175700000254437ms

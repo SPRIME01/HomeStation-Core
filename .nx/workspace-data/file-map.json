@@ -1,0 +1,346 @@
+{
+  "version": "6.0",
+  "nxVersion": "21.3.10",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/src/main.py",
+        "hash": "18081581007776838771"
+      },
+      {
+        "file": ".github/instructions/tech.md",
+        "hash": "18201249316655354674"
+      },
+      {
+        "file": "templates/product.md",
+        "hash": "3948857910836101564"
+      },
+      {
+        "file": "scripts/spec_manifest_to_md.py",
+        "hash": "15051294189269007705"
+      },
+      {
+        "file": ".github/instructions/structure.md",
+        "hash": "8644178254701916372"
+      },
+      {
+        "file": ".github/instructions/prompts/structure.prompt.md",
+        "hash": "4927678629340636655"
+      },
+      {
+        "file": "tests/justfile/test-vault-init.sh",
+        "hash": "18440305799314851838"
+      },
+      {
+        "file": "docs/DevReadMe.md",
+        "hash": "11568101726933559271"
+      },
+      {
+        "file": ".github/instructions/prompts/product.prompt.md",
+        "hash": "6429105052883935074"
+      },
+      {
+        "file": ".github/instructions/security.md",
+        "hash": "1632296361030456667"
+      },
+      {
+        "file": "nx.json",
+        "hash": "5665488684587741297"
+      },
+      {
+        "file": "tests/justfile/test-pre-merge.sh",
+        "hash": "2349199931701024229"
+      },
+      {
+        "file": "scripts/argo-sync.sh",
+        "hash": "2827196558173406305"
+      },
+      {
+        "file": ".github/instructions/data.md",
+        "hash": "10337019996044203506"
+      },
+      {
+        "file": "README.md",
+        "hash": "11147521404435976950"
+      },
+      {
+        "file": ".github/instructions/prompts/design.prompt.md",
+        "hash": "14383135828653696411"
+      },
+      {
+        "file": ".github/instructions/prompts/spec_pack.orchestrator.md",
+        "hash": "18157965598915564043"
+      },
+      {
+        "file": ".env.example",
+        "hash": "17472014680832437757"
+      },
+      {
+        "file": "docs/spec.md",
+        "hash": "12646666496452476834"
+      },
+      {
+        "file": "infra/argocd/bootstrap.yaml",
+        "hash": "2757771873103957266"
+      },
+      {
+        "file": ".github/instructions/prompts/orchestrator.prompt.md",
+        "hash": "10085955471059226587"
+      },
+      {
+        "file": "scripts/doctor.sh",
+        "hash": "15123640219145227489"
+      },
+      {
+        "file": "tests/justfile/test-lint.sh",
+        "hash": "8244411531797896916"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile",
+        "hash": "17240827428475442228"
+      },
+      {
+        "file": "tests/justfile/test-doctor.sh",
+        "hash": "10746613326644121873"
+      },
+      {
+        "file": "tests/justfile/test-generate-vault-secret.sh",
+        "hash": "12951390557443670846"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile:Zone.Identifier",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "15285719405862018188"
+      },
+      {
+        "file": "workflows/spec-lint.yml",
+        "hash": "5681345042683432442"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "8024946245001145684"
+      },
+      {
+        "file": ".github/instructions/engineering.md",
+        "hash": "4812569844694144455"
+      },
+      {
+        "file": "templates/structure.md",
+        "hash": "10915644983210331899"
+      },
+      {
+        "file": "tests/justfile/run-all-tests.sh",
+        "hash": "13547138467449750135"
+      },
+      {
+        "file": ".github/instructions/prompts/tasks.prompt.md",
+        "hash": "9801011966878912011"
+      },
+      {
+        "file": "package.json",
+        "hash": "12198868253613460985"
+      },
+      {
+        "file": ".github/instructions/prompts/requirements.prompt.md",
+        "hash": "11917153952887869058"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "600490069392053818"
+      },
+      {
+        "file": "scripts/spec_lint.py",
+        "hash": "6306465704236622553"
+      },
+      {
+        "file": "tests/justfile/test-generate-service.sh",
+        "hash": "10651121450482798261"
+      },
+      {
+        "file": "tests/justfile/test-framework.sh",
+        "hash": "13351128970707982681"
+      },
+      {
+        "file": "tests/justfile/test-validate.sh",
+        "hash": "4149731674713468661"
+      },
+      {
+        "file": ".github/instructions/product.md",
+        "hash": "7606903339486000469"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13496586988542919823"
+      },
+      {
+        "file": "tests/justfile/test-test.sh",
+        "hash": "7723086436483261367"
+      },
+      {
+        "file": ".vscode/copilot-instructions.md",
+        "hash": "17437951876209873930"
+      },
+      {
+        "file": "templates/tech.md",
+        "hash": "10044357086834363110"
+      },
+      {
+        "file": "infra/argocd/apps/README.md",
+        "hash": "14473872137462121908"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/src/main.py:Zone.Identifier",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tests/justfile/test-init.sh",
+        "hash": "8057677086583301552"
+      },
+      {
+        "file": "tests/justfile/test-generate-argo-app.sh",
+        "hash": "16036335081057061735"
+      },
+      {
+        "file": ".vscode/mcp.json",
+        "hash": "2078074389354027286"
+      },
+      {
+        "file": "docs/Rancher_K3s.md",
+        "hash": "157421206855515966"
+      },
+      {
+        "file": "tests/justfile/test-provision-core.sh",
+        "hash": "870558159327016699"
+      },
+      {
+        "file": "tests/justfile/test-deploy.sh",
+        "hash": "1874548503076203934"
+      },
+      {
+        "file": ".github/instructions/prompts/tech.prompt.md",
+        "hash": "12977261139821287040"
+      },
+      {
+        "file": "justfile",
+        "hash": "16340587461294594873"
+      }
+    ],
+    "projectFileMap": {
+      "nx-homelab-plugin": [
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/files/argocd-app.yaml__tmpl__",
+          "hash": "9134881874789136902"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/files/argocd-app.yaml__tmpl__:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/generator.ts",
+          "hash": "672098064990299845"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/generator.ts:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/schema.json",
+          "hash": "3298237119454257122"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/argo-app/schema.json:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/Dockerfile__tmpl__",
+          "hash": "5551345928484471314"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/Dockerfile__tmpl__:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/README.md__tmpl__",
+          "hash": "11877687826970673436"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/README.md__tmpl__:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/src/index.ts__tmpl__",
+          "hash": "5402886629276211021"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/files/src/index.ts__tmpl__:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/generator.ts",
+          "hash": "13745324480918929467"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/generator.ts:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/schema.json",
+          "hash": "9841361622238830212"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/service/schema.json:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/files/vault-policy.hcl__tmpl__",
+          "hash": "4056815633190528788"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/files/vault-policy.hcl__tmpl__:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/generator.ts",
+          "hash": "216751409012979431"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/generator.ts:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/schema.json",
+          "hash": "16477850150178507497"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/generators/vault-secret/schema.json:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/package.json",
+          "hash": "833422350239128064"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/project.json",
+          "hash": "13480206569405207321"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/project.json:Zone.Identifier",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/tsconfig.json",
+          "hash": "17696129113254062408"
+        },
+        {
+          "file": "libs/nx-homelab-plugin/tsconfig.json:Zone.Identifier",
+          "hash": "3244421341483603138"
+        }
+      ]
+    }
+  }
+}

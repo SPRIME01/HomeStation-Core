@@ -1,0 +1,68 @@
+{
+  "libs/nx-homelab-plugin": {
+    "root": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "targets": [
+      "libs/nx-homelab-plugin/package.json",
+      "nx/core/package-json"
+    ],
+    "projectType": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "libs/nx-homelab-plugin/project.json",
+      "nx/core/project-json"
+    ]
+  }
+}

@@ -36,8 +36,8 @@ vault_init:
 # 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
 provision_core:
     kubectl apply -f infra/argocd/bootstrap.yaml
-    echo "⌛ Waiting for ArgoCD sync..."
-    nx run infra:wait --verbose
+    echo "⌛ Waiting for ArgoCD applications to sync..."
+    kubectl wait --for=condition=Synced --timeout=600s application --all -n argocd
 
 # 5️⃣ Generate new artefacts using Nx plugin wrappers
 
