@@ -1,0 +1,9 @@
+{
+  "name": "nx-homelab-plugin",
+  "projectType": "library",
+  "sourceRoot": "libs/nx-homelab-plugin/src",
+  "targets": {
+    "lint": { "executor": "nx:eslint" },
+    "test": { "executor": "nx:jest" }
+  }
+}

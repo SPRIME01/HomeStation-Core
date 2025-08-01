@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "service options",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "description": "Service name" },
+    "language": {
+      "type": "string",
+      "enum": ["python", "node"],
+      "default": "python"
+    },
+    "database": { "type": "boolean", "default": false }
+  },
+  "required": ["name"]
+}

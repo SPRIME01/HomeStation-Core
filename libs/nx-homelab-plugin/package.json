@@ -1,0 +1,13 @@
+{
+  "name": "@org/nx-homelab-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "dependencies": {
+    "@nrwl/devkit": "18.0.0",
+    "@nrwl/node": "18.0.0"
+  }
+}
+
+

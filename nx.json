@@ -1,0 +1,10 @@
+{
+  "npmScope": "homelab",
+  "affected": { "defaultBase": "main" },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": { "cacheableOperations": ["build", "test", "lint", "e2e"] }
+    }
+  }
+}

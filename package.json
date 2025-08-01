@@ -1,0 +1,16 @@
+{
+  "name": "homelab-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "format": "nx format:write",
+    "lint": "nx run-many --target=lint --all",
+    "test": "nx run-many --target=test --all"
+  },
+  "devDependencies": {
+    "@nrwl/devkit": "18.0.0",
+    "@nrwl/node": "18.0.0",
+    "@org/nx-homelab-plugin": "workspace:*",
+    "typescript": "5.4.4"
+  }
+}

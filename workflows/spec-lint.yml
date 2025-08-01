@@ -1,0 +1,83 @@
+name: Spec Pack Lint
+
+on:
+  pull_request:
+    paths:
+      - 'requirements.md'
+      - 'design.md'
+      - 'tasks.md'
+      - 'scripts/spec_lint.py'
+      - 'scripts/spec_manifest_to_md.py'
+      - '.github/workflows/spec-lint.yml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint:
+    name: Lint & Coverage Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install just
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just
+
+      - name: Run Spec Linter
+        id: lint
+        shell: bash
+        run: |
+          set -euxo pipefail
+          chmod +x scripts/spec_lint.py || true
+          # Run and capture pass/fail without stopping the workflow
+          if python3 scripts/spec_lint.py; then
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload spec-manifest artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spec-manifest
+          path: spec-manifest.json
+          if-no-files-found: warn
+
+      - name: Render coverage to Markdown
+        if: always()
+        run: |
+          python3 scripts/spec_manifest_to_md.py > spec-coverage.md || echo "No manifest to render" > spec-coverage.md
+
+      - name: Post or Update PR Coverage Comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const header = '## 🔎 Spec Pack Coverage';
+            const body = `${header}\n\n` + fs.readFileSync('spec-coverage.md','utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
+            const prev = comments.find(c => c.user.type === 'Bot' && c.body && c.body.includes(header));
+            if (prev) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: prev.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+      - name: Fail if lint failed
+        if: steps.lint.outputs.failed == 'true'
+        run: |
+          echo "Spec lint failed. See PR comment for details."
+          exit 1
