@@ -103,9 +103,21 @@ spec:
     helm:
       values: |
         db:
+          enabled: true
           image:
             repository: supabase/postgres
-            tag: "17.4.1.036"
+            tag: "17.4.1.068"
+            pullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi" 
+              cpu: "500m"
+          persistence:
+            enabled: true
+            size: 1Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: supabase

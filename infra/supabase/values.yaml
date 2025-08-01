@@ -1,0 +1,113 @@
+# Supabase Helm Values
+# Using latest stable PostgreSQL 17.4 with Supabase extensions
+
+# Database Configuration  
+db:
+  enabled: true
+  image:
+    repository: supabase/postgres
+    tag: "17.4.1.068"  # Latest stable release
+    pullPolicy: IfNotPresent
+  
+  # Resource limits for stability
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi" 
+      cpu: "500m"
+  
+  # Persistence for data durability
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: ""  # Use default storage class
+
+# Studio Configuration
+studio:
+  enabled: true
+  image:
+    repository: supabase/studio
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Auth Service
+auth:
+  enabled: true
+  image:
+    repository: supabase/gotrue
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# REST API
+rest:
+  enabled: true
+  image:
+    repository: postgrest/postgrest
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Realtime Service  
+realtime:
+  enabled: true
+  image:
+    repository: supabase/realtime
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Storage Service
+storage:
+  enabled: true
+  image:
+    repository: supabase/storage-api
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Image Proxy
+imgproxy:
+  enabled: true
+  image:
+    repository: darthsim/imgproxy
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Kong Gateway
+kong:
+  enabled: true
+  image:
+    repository: kong
+    tag: "latest" 
+    pullPolicy: IfNotPresent
+
+# Analytics
+analytics:
+  enabled: true
+  image:
+    repository: supabase/logflare
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Vector/Telemetry
+vector:
+  enabled: true
+  image:
+    repository: timberio/vector
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Edge Functions
+functions:
+  enabled: true
+  image:
+    repository: supabase/edge-runtime
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+# Meta API
+meta:
+  enabled: true
+  image:
+    repository: supabase/postgres-meta
+    tag: "latest"
+    pullPolicy: IfNotPresent
