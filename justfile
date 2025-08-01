@@ -37,9 +37,18 @@ vault_init:
 vault_setup:
     bash scripts/setup-vault.sh
 
-# 3️⃣.2 Setup Supabase secrets from .env
+# 3️⃣.2 Generate Supabase JWT secrets (run this first!)
+generate_supabase_jwt:
+    node scripts/generate-supabase-jwt.js
+
+# 3️⃣.3 Setup Supabase secrets from .env
 supabase_secrets:
     bash scripts/setup-supabase-secrets.sh
+
+# 3️⃣.4 Complete Supabase setup (generate JWT + create secrets + restart pods)
+setup_supabase: generate_supabase_jwt supabase_secrets
+    kubectl rollout restart -n supabase deployment
+    echo "🎉 Supabase setup complete! Check pod status with: kubectl get pods -n supabase"
 
 # 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
 provision_core:

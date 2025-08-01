@@ -113,7 +113,7 @@ spec:
               memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "512Mi" 
+              memory: "512Mi"
               cpu: "500m"
           persistence:
             enabled: true

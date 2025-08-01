@@ -12,5 +12,9 @@
     "@nrwl/node": "18.0.0",
     "@org/nx-homelab-plugin": "workspace:*",
     "typescript": "5.4.4"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "jsonwebtoken": "^9.0.2"
   }
 }

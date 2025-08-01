@@ -19,13 +19,20 @@ fi
 # Check required variables
 if [ -z "${SUPABASE_JWT_SECRET:-}" ]; then
     echo "❌ SUPABASE_JWT_SECRET not found in .env"
+    echo "💡 Run 'just generate_supabase_jwt' first to generate proper JWT secrets"
     exit 1
 fi
 
-# Generate a secure service key if not provided
+if [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+    echo "❌ SUPABASE_ANON_KEY not found in .env"
+    echo "� Run 'just generate_supabase_jwt' first to generate proper JWT secrets"
+    exit 1
+fi
+
 if [ -z "${SUPABASE_SERVICE_KEY:-}" ]; then
-    echo "🔧 Generating service key from JWT secret..."
-    SUPABASE_SERVICE_KEY="${SUPABASE_JWT_SECRET}-service"
+    echo "❌ SUPABASE_SERVICE_KEY not found in .env"
+    echo "💡 Run 'just generate_supabase_jwt' first to generate proper JWT secrets"
+    exit 1
 fi
 
 # Generate database password if not provided
@@ -41,6 +48,7 @@ kubectl create namespace supabase --dry-run=client -o yaml | kubectl apply -f -
 echo "🔐 Creating supabase-secrets..."
 kubectl create secret generic supabase-secrets \
     --from-literal=jwt-secret="${SUPABASE_JWT_SECRET}" \
+    --from-literal=anon-key="${SUPABASE_ANON_KEY}" \
     --from-literal=service-key="${SUPABASE_SERVICE_KEY}" \
     --namespace=supabase \
     --dry-run=client -o yaml | kubectl apply -f -
