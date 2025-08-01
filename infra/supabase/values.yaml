@@ -73,37 +73,21 @@ imgproxy:
     tag: "latest"
     pullPolicy: IfNotPresent
 
-# Kong Gateway
+# Kong Gateway - DISABLED (using Traefik instead)
 kong:
-  enabled: true
-  image:
-    repository: kong
-    tag: "latest"
-    pullPolicy: IfNotPresent
+  enabled: false
 
-# Analytics
+# Analytics - DISABLED (optional for development)
 analytics:
-  enabled: true
-  image:
-    repository: supabase/logflare
-    tag: "latest"
-    pullPolicy: IfNotPresent
+  enabled: false
 
-# Vector/Telemetry
+# Vector/Telemetry - DISABLED (optional for development)  
 vector:
-  enabled: true
-  image:
-    repository: timberio/vector
-    tag: "latest"
-    pullPolicy: IfNotPresent
+  enabled: false
 
-# Edge Functions
+# Edge Functions - DISABLED (optional for development)
 functions:
-  enabled: true
-  image:
-    repository: supabase/edge-runtime
-    tag: "latest"
-    pullPolicy: IfNotPresent
+  enabled: false
 
 # Meta API
 meta:

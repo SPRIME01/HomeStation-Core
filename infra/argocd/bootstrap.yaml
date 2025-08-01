@@ -118,6 +118,14 @@ spec:
           persistence:
             enabled: true
             size: 1Gi
+        kong:
+          enabled: false  # Using Traefik instead
+        analytics:
+          enabled: false  # Optional for development
+        vector:
+          enabled: false  # Optional for development
+        functions:
+          enabled: false  # Optional for development
   destination:
     server: https://kubernetes.default.svc
     namespace: supabase

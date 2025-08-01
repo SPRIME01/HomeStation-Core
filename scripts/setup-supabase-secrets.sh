@@ -53,6 +53,15 @@ kubectl create secret generic supabase-secrets \
     --namespace=supabase \
     --dry-run=client -o yaml | kubectl apply -f -
 
+# Create JWT secret (expected by Supabase chart templates)
+echo "🔐 Creating supabase-jwt secret..."
+kubectl create secret generic supabase-jwt \
+    --from-literal=secret="${SUPABASE_JWT_SECRET}" \
+    --from-literal=anonKey="${SUPABASE_ANON_KEY}" \
+    --from-literal=serviceKey="${SUPABASE_SERVICE_KEY}" \
+    --namespace=supabase \
+    --dry-run=client -o yaml | kubectl apply -f -
+
 # Create database secret
 echo "🔐 Creating supabase-db secret..."
 kubectl create secret generic supabase-db \
