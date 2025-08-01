@@ -106,6 +106,18 @@ spec:
           image:
             repository: supabase/postgres
             tag: "17.4.1.036"
+        postgres:
+          image:
+            repository: supabase/postgres
+            tag: "17.4.1.036"
+        database:
+          image:
+            repository: supabase/postgres
+            tag: "17.4.1.036"
+        db:
+          image:
+            repository: supabase/postgres
+            tag: "17.4.1.036"
         postgresql:
           image:
             repository: supabase/postgres
