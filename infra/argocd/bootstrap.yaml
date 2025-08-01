@@ -100,6 +100,16 @@ spec:
     repoURL: https://github.com/supabase-community/supabase-kubernetes.git
     targetRevision: HEAD
     path: charts/supabase
+    helm:
+      values: |
+        supabase-db:
+          image:
+            repository: supabase/postgres
+            tag: "17.4.1.036"
+        postgresql:
+          image:
+            repository: supabase/postgres
+            tag: "17.4.1.036"
   destination:
     server: https://kubernetes.default.svc
     namespace: supabase
