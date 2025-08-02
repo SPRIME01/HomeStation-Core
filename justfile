@@ -95,4 +95,55 @@ deploy:
 # 7️⃣ Quality gate for merges
 pre-merge: validate
 
-# .PHONY: init lint test doctor validate vault_init provision_core generate-service generate-argo-app generate-vault-secret deploy pre-merge
+# 8️⃣ Infrastructure as Code (Pulumi)
+pulumi-install:
+    @echo "📦 Installing Pulumi dependencies..."
+    cd infrastructure/pulumi && pnpm install
+
+pulumi-preview:
+    @echo "🔍 Previewing infrastructure changes with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi preview'
+
+pulumi-up:
+    @echo "🚀 Deploying infrastructure with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi up'
+
+pulumi-destroy:
+    @echo "💥 Destroying infrastructure with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi destroy'
+
+pulumi-init stack:
+    @echo "🏗️ Initializing Pulumi stack: {{stack}}"
+    cd infrastructure/pulumi && pulumi stack init {{stack}}
+
+pulumi-init-default:
+    @echo "🏗️ Initializing default Pulumi stack: homelab-dev"
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi login --local'
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi stack init homelab-dev || echo "Stack already exists"'
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi config set kubeconfig ~/.kube/config'
+
+# 9️⃣ Configuration Management (Ansible)
+ansible-setup:
+    @echo "⚙️ Setting up homelab with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/setup.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-deploy-supabase:
+    @echo "🐘 Deploying Supabase with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/deploy-supabase.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-backup:
+    @echo "💾 Creating homelab backup with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/backup.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-ping:
+    @echo "🏓 Testing Ansible connectivity..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible all -m ping --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+# 🔟 Complete infrastructure setup
+infra-init: pulumi-install pulumi-init-default ansible-setup
+    @echo "🎉 Infrastructure initialization complete!"
+
+infra-deploy: pulumi-up ansible-deploy-supabase
+    @echo "🚀 Infrastructure deployment complete!"
+
+# .PHONY: init lint test doctor validate vault_init provision_core generate-service generate-argo-app generate-vault-secret deploy pre-merge pulumi-install pulumi-preview pulumi-up pulumi-destroy pulumi-init pulumi-init-default ansible-setup ansible-deploy-supabase ansible-backup infra-init infra-deploy

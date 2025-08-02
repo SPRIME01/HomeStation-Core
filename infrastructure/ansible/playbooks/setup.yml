@@ -1,0 +1,85 @@
+---
+- name: Homelab Infrastructure Setup
+  hosts: homelab
+  become: yes
+  gather_facts: yes
+
+  vars:
+    kubeconfig_path: "{{ ansible_env.HOME }}/.kube/config"
+
+  tasks:
+    - name: Check if running in WSL2
+      stat:
+        path: /proc/version
+      register: proc_version
+
+    - name: Display environment info
+      debug:
+        msg: "Setting up homelab infrastructure on {{ ansible_hostname }}"
+
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install basic required packages
+      package:
+        name:
+          - curl
+          - wget
+          - git
+          - unzip
+          - jq
+        state: present
+
+    - name: Check if kubectl is already installed
+      command: which kubectl
+      register: kubectl_check
+      ignore_errors: yes
+      become: no
+
+    - name: Install kubectl via snap if not present
+      snap:
+        name: kubectl
+        classic: yes
+      when: kubectl_check.rc != 0
+
+    - name: Ensure ~/.kube directory exists
+      file:
+        path: "/home/{{ ansible_user_id }}/.kube"
+        state: directory
+        mode: '0755'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Check if kubectl can connect to cluster
+      command: kubectl cluster-info
+      register: kubectl_result
+      ignore_errors: yes
+      become: no
+      environment:
+        KUBECONFIG: "/home/{{ ansible_user_id }}/.kube/config"
+
+    - name: Display kubectl connection status
+      debug:
+        msg: "Kubectl connection: {{ 'SUCCESS' if kubectl_result.rc == 0 else 'FAILED - ' + kubectl_result.stderr }}"
+
+    - name: Check for kubeconfig
+      stat:
+        path: "{{ kubeconfig_path }}"
+      register: kubeconfig_stat
+
+    - name: Display kubeconfig status
+      debug:
+        msg: "Kubeconfig {{ 'exists' if kubeconfig_stat.stat.exists else 'missing' }} at {{ kubeconfig_path }}"
+
+    - name: Test kubectl connectivity
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+      register: namespaces
+      failed_when: false
+
+    - name: Display cluster connectivity
+      debug:
+        msg: "{{ 'Connected to Kubernetes cluster' if namespaces.resources is defined else 'Unable to connect to Kubernetes cluster' }}"

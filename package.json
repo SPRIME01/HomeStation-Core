@@ -8,7 +8,13 @@
     "test": "nx run-many --target=test --all",
     "affected:lint": "nx affected --target=lint",
     "affected:test": "nx affected --target=test",
-    "affected:build": "nx affected --target=build"
+    "affected:build": "nx affected --target=build",
+    "pulumi:preview": "cd infrastructure/pulumi && pulumi preview",
+    "pulumi:up": "cd infrastructure/pulumi && pulumi up",
+    "pulumi:destroy": "cd infrastructure/pulumi && pulumi destroy",
+    "ansible:setup": "cd infrastructure/ansible && ansible-playbook playbooks/setup.yml",
+    "ansible:deploy": "cd infrastructure/ansible && ansible-playbook playbooks/deploy-supabase.yml",
+    "ansible:backup": "cd infrastructure/ansible && ansible-playbook playbooks/backup.yml"
   },
   "devDependencies": {
     "@nx/devkit": "21.3.10",

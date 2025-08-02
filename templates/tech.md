@@ -1,6 +1,11 @@
 # Technology Stack & Build System
 
-## Toolchain Versions (authoritative)
+## T## Infrastructure & Operations
+- **Containers:** All deployable services build Docker images from the root `Dockerfile`. Use `docker buildx bake` for multi-arch images.
+- **Orchestration:** Kubernetes manages service deployments. Helm charts live in `infrastructure/helm` and define deployments per environment.
+- **IaC:** Pulumi code lives in `infrastructure/pulumi` and provisions cloud resources and Kubernetes infrastructure. TypeScript is the preferred language for Pulumi programs.
+- **Configuration Management:** Ansible playbooks in `infrastructure/ansible` handle server configuration, application deployment automation, and operational tasks.
+- **Observability:** Use Prometheus for metrics, Loki for logs and Jaeger for tracing. Expose metrics on `/metrics` endpoints in services.ain Versions (authoritative)
 ```yaml
 engines:
   node: ">=18.0.0"

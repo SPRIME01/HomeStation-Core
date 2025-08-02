@@ -15,7 +15,7 @@ This repository is organised as an Nx monorepo. The top‑level tree looks like 
 │  ├─ mobile/          # Mobile‑only feature libraries (if used)
 │  └─ api/             # Common API logic (e.g. authentication, error handling)
 ├─ tools/              # Generators and custom Nx executors
-├─ infrastructure/     # IaC (Terraform), Kubernetes manifests and Helm charts
+├─ infrastructure/     # IaC (Pulumi), Kubernetes manifests, Helm charts, and Ansible playbooks
 ├─ scripts/            # Development utilities (setup, migrations, data seeding)
 ├─ docs/               # Project documentation (architecture, decision records)
 └─ .github/instructions/ # Steering documents (product.md, tech.md, structure.md, etc.)

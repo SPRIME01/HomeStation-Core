@@ -1,0 +1,58 @@
+{
+    "name": "infrastructure",
+    "$schema": "../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "infrastructure",
+    "targets": {
+        "pulumi:preview": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pulumi preview",
+                "cwd": "infrastructure/pulumi"
+            }
+        },
+        "pulumi:up": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pulumi up --yes",
+                "cwd": "infrastructure/pulumi"
+            }
+        },
+        "pulumi:destroy": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pulumi destroy --yes",
+                "cwd": "infrastructure/pulumi"
+            }
+        },
+        "ansible:setup": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "ansible-playbook playbooks/setup.yml",
+                "cwd": "infrastructure/ansible"
+            }
+        },
+        "ansible:deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "ansible-playbook playbooks/deploy-supabase.yml",
+                "cwd": "infrastructure/ansible"
+            }
+        },
+        "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "ansible-lint playbooks/ || echo 'Install ansible-lint: pip install ansible-lint'",
+                    "pulumi preview --diff || echo 'Pulumi not configured'"
+                ],
+                "parallel": false,
+                "cwd": "infrastructure"
+            }
+        }
+    },
+    "tags": [
+        "scope:infrastructure",
+        "type:iac"
+    ]
+}

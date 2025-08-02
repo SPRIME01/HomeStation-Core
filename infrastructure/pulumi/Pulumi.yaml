@@ -1,0 +1,9 @@
+{
+  "name": "homelab-infrastructure",
+  "description": "Homelab infrastructure management with Pulumi",
+  "runtime": "nodejs",
+  "main": "index.ts",
+  "template": {
+    "description": "A Kubernetes Pulumi program in TypeScript for homelab infrastructure"
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "name": "homelab-infrastructure",
+    "version": "1.0.0",
+    "description": "Homelab infrastructure with Pulumi",
+    "main": "index.ts",
+    "scripts": {
+        "build": "tsc",
+        "preview": "pulumi preview",
+        "up": "pulumi up",
+        "destroy": "pulumi destroy",
+        "refresh": "pulumi refresh",
+        "stack:init": "pulumi stack init",
+        "stack:select": "pulumi stack select",
+        "install": "pnpm install",
+        "update": "pnpm update"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.126.0",
+        "@pulumi/kubernetes": "^4.13.1",
+        "@pulumi/kubernetes-cert-manager": "^0.0.5",
+        "@pulumi/random": "^4.16.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    }
+}

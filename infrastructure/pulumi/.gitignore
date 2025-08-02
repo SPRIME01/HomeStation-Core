@@ -1,0 +1,18 @@
+# Pulumi State and Generated Files
+bin/
+node_modules/
+*.log
+
+# Pulumi Stack Files (keep these in version control)
+# Pulumi.*.yaml
+
+# Environment specific secrets (never commit)
+Pulumi.*.yaml.backup
+Pulumi.*.yaml.bak
+
+# Pulumi plugin cache
+.pulumi/
+
+# TypeScript build artifacts
+dist/
+build/

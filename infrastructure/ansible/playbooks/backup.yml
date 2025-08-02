@@ -1,0 +1,44 @@
+---
+- name: Backup Homelab Configuration
+  hosts: homelab
+  gather_facts: yes
+
+  vars:
+    backup_dir: "/tmp/homelab-backup-{{ ansible_date_time.epoch }}"
+
+  tasks:
+    - name: Create backup directory
+      file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Backup Kubernetes configs
+      shell: |
+        kubectl get all --all-namespaces -o yaml > {{ backup_dir }}/all-resources.yaml
+        kubectl get secrets --all-namespaces -o yaml > {{ backup_dir }}/secrets.yaml
+        kubectl get configmaps --all-namespaces -o yaml > {{ backup_dir }}/configmaps.yaml
+        kubectl get persistentvolumes -o yaml > {{ backup_dir }}/persistent-volumes.yaml
+      delegate_to: localhost
+
+    - name: Backup Vault data (if available)
+      shell: |
+        kubectl exec -n vault vault-0 -- vault kv export -format=json secret/ > {{ backup_dir }}/vault-secrets.json || echo "Vault backup failed"
+      delegate_to: localhost
+      failed_when: false
+
+    - name: Backup Docker images
+      shell: |
+        docker images --format "table {{.Repository}}:{{.Tag}}" | grep -v REPOSITORY > {{ backup_dir }}/docker-images.txt
+      delegate_to: localhost
+      failed_when: false
+
+    - name: Create backup archive
+      archive:
+        path: "{{ backup_dir }}"
+        dest: "{{ backup_dir }}.tar.gz"
+        format: gz
+
+    - name: Display backup location
+      debug:
+        msg: "Backup created at {{ backup_dir }}.tar.gz"

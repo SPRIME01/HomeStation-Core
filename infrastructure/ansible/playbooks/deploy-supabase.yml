@@ -1,0 +1,67 @@
+---
+- name: Deploy Supabase via ArgoCD
+  hosts: homelab
+  gather_facts: no
+
+  vars:
+    namespace: "supabase"
+    argocd_namespace: "argocd"
+
+  tasks:
+    - name: Check if Supabase namespace exists
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        name: "{{ namespace }}"
+      register: supabase_ns
+
+    - name: Create Supabase namespace if missing
+      kubernetes.core.k8s:
+        name: "{{ namespace }}"
+        api_version: v1
+        kind: Namespace
+        state: present
+      when: supabase_ns.resources | length == 0
+
+    - name: Apply Supabase secrets
+      shell: bash /home/prime/homelab/scripts/setup-supabase-secrets.sh
+      delegate_to: localhost
+
+    - name: Check ArgoCD Supabase application
+      kubernetes.core.k8s_info:
+        api_version: argoproj.io/v1alpha1
+        kind: Application
+        name: supabase
+        namespace: "{{ argocd_namespace }}"
+      register: supabase_app
+
+    - name: Sync Supabase application
+      kubernetes.core.k8s:
+        api_version: argoproj.io/v1alpha1
+        kind: Application
+        name: supabase
+        namespace: "{{ argocd_namespace }}"
+        state: present
+        definition:
+          spec:
+            operation:
+              sync: {}
+      when: supabase_app.resources | length > 0
+
+    - name: Wait for Supabase pods to be ready
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        namespace: "{{ namespace }}"
+        label_selectors:
+          - app.kubernetes.io/name=supabase
+        wait: true
+        wait_condition:
+          type: Ready
+          status: "True"
+        wait_timeout: 300
+      register: supabase_pods
+
+    - name: Display Supabase deployment status
+      debug:
+        msg: "Supabase pods running: {{ supabase_pods.resources | length }}"

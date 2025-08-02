@@ -40,7 +40,8 @@ platforms:
 ## Infrastructure & Operations
 - **Containers:** All deployable services build Docker images from the root `Dockerfile`. Use `docker buildx bake` for multi-arch images.
 - **Orchestration:** Kubernetes manages service deployments. Helm charts live in `infrastructure/helm` and define deployments per environment.
-- **IaC:** Terraform code lives in `infrastructure/terraform` and provisions cloud resources. Pulumi is reserved for future infrastructure if needed.
+- **IaC:** Pulumi code lives in `infrastructure/pulumi` and provisions cloud resources and Kubernetes infrastructure. TypeScript is the preferred language for Pulumi programs.
+- **Configuration Management:** Ansible playbooks in `infrastructure/ansible` handle server configuration, application deployment automation, and operational tasks.
 - **Observability:** Use Prometheus for metrics, Loki for logs and Jaeger for tracing. Expose metrics on `/metrics` endpoints in services.
 - **Secrets:** Secrets are stored in HashiCorp Vault and injected via environment variables at runtime. Do not commit secrets to git.
 

@@ -1,0 +1,3 @@
+encryptionsalt: v1:kQjrbv+zNX8=:v1:1zQ/cNHfeMT2Lpof:LvfBfa/nwq3y6IM6zvAg3eFuW4tdbg==
+config:
+  homelab-infrastructure:kubeconfig: /home/prime/.kube/config
