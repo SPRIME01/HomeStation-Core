@@ -67,8 +67,29 @@ supabase_status:
     echo "🔍 Traefik IngressRoutes:"
     kubectl get ingressroutes -n supabase
     echo ""
+    echo "🔍 Traefik Service & LoadBalancer:"
+    kubectl get svc traefik -n traefik-system
+    echo ""
     echo "🔍 ArgoCD Application Status:"
     kubectl get applications -n argocd supabase
+
+# 3️⃣.7 Check Traefik status and dashboard access
+traefik_status:
+    echo "🌐 Traefik Status:"
+    kubectl get all -n traefik-system
+    echo ""
+    echo "🔍 Traefik Service Details:"
+    kubectl get svc traefik -n traefik-system -o wide
+    echo ""
+    echo "🚦 All IngressRoutes:"
+    kubectl get ingressroutes -A
+    echo ""
+    echo "📊 Traefik Dashboard Access:"
+    echo "  HTTP:  http://localhost:30413 (if port-forward needed)"
+    echo "  HTTPS: https://localhost:32184 (if port-forward needed)"
+    echo ""
+    echo "🔍 Recent Traefik Logs:"
+    kubectl logs deployment/traefik -n traefik-system --tail=5
 
 # 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
 provision_core:
@@ -90,7 +111,7 @@ generate-vault-secret path policy:
 # 6️⃣ Deploy to cluster (push manifests, ArgoCD sync)
 deploy:
     git push origin HEAD
-    bash scripts/argo-sync.sh $(NAMESPACE)
+    bash scripts/argo-sync.sh {{NAMESPACE}}
 
 # 7️⃣ Quality gate for merges
 pre-merge: validate

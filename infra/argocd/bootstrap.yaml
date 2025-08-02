@@ -41,9 +41,13 @@ spec:
             tls:
               enabled: true
         additionalArguments:
-          - "--certificatesresolvers.letsencrypt.acme.email=admin@homestation.local"
+          # Use valid email from .env for Let's Encrypt
+          - "--certificatesresolvers.letsencrypt.acme.email=sprime01@gmail.com"
           - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
           - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+          # Enable staging for testing to avoid rate limits
+          - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+          - "--log.level=INFO"
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik-system

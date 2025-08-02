@@ -1,0 +1,36 @@
+---
+# Traefik Dashboard IngressRoute for local access
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: traefik-system
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+
+---
+# HTTPS version (when certificates are working)
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-secure
+  namespace: traefik-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+  # Enable when certificates are properly configured
+  # tls:
+  #   certResolver: letsencrypt

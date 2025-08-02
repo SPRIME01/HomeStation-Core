@@ -34,6 +34,9 @@ Creates Kubernetes secrets for Supabase using values from your .env file.
 ### `just setup_supabase`
 Complete Supabase setup including JWT generation, secrets creation, and pod restart.
 
+### `just traefik_status`
+Displays comprehensive Traefik status including service details, IngressRoutes, and recent logs.
+
 ## 🚀 Deployment & Infrastructure
 
 ### `just deploy_supabase_minimal`
