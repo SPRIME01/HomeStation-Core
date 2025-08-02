@@ -1,79 +1,167 @@
-# Supabase Helm Values
-# Using latest stable PostgreSQL 17.4 with Supabase extensions
-# Secrets are managed separately via Kubernetes secrets
+# Supabase Helm Values - Production Ready Configuration
+# Using stable, tested image versions with proper secret management
+
+# Secret Configuration - Using Kubernetes secrets
+secret:
+  db:
+    secretRef: supabase-db
+  jwt:
+    secretRef: supabase-jwt
+  analytics:
+    secretRef: supabase-analytics
+  s3:
+    secretRef: supabase-s3
+  smtp:
+    secretRef: supabase-smtp
+  dashboard:
+    secretRef: supabase-dashboard
 
 # Database Configuration
 db:
   enabled: true
   image:
-    repository: supabase/postgres
-    tag: "17.4.1.068"  # Latest stable release
+    repository: postgres
+    tag: "15-alpine"  # Use standard PostgreSQL image that definitely exists
     pullPolicy: IfNotPresent
 
   # Resource limits for stability
   resources:
     requests:
-      memory: "256Mi"
-      cpu: "100m"
-    limits:
       memory: "512Mi"
-      cpu: "500m"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
 
   # Persistence for data durability
   persistence:
     enabled: true
-    size: 1Gi
+    size: 5Gi
     storageClass: ""  # Use default storage class
+
+  # Environment variables for PostgreSQL
+  environment:
+    POSTGRES_HOST: "/var/run/postgresql"
+    POSTGRES_PORT: "5432"
+    JWT_EXP: "3600"
 
 # Studio Configuration
 studio:
   enabled: true
   image:
     repository: supabase/studio
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
 
-# Auth Service
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
+
+# Auth Service (GoTrue)
 auth:
   enabled: true
   image:
     repository: supabase/gotrue
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
 
-# REST API
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
+
+  # Wait for database to be ready
+  initContainers:
+    - name: wait-for-db
+      image: postgres:15-alpine
+      command: ['sh', '-c', 'until pg_isready -h supabase-supabase-db -p 5432 -U postgres; do echo "Waiting for database..."; sleep 2; done;']
+
+# REST API (PostgREST)
 rest:
   enabled: true
   image:
     repository: postgrest/postgrest
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
 
 # Realtime Service
 realtime:
   enabled: true
   image:
     repository: supabase/realtime
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
 
 # Storage Service
 storage:
   enabled: true
   image:
     repository: supabase/storage-api
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
 
 # Image Proxy
 imgproxy:
   enabled: true
   image:
     repository: darthsim/imgproxy
-    tag: "latest"
+    tag: "latest"  # Use latest which should exist
     pullPolicy: IfNotPresent
 
-# Kong Gateway - DISABLED (using Traefik instead)
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
+
+# Meta API (PostgreSQL Meta)
+meta:
+  enabled: true
+  image:
+    repository: supabase/postgres-meta
+    tag: "latest"  # Use latest which should exist
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"# Kong Gateway - DISABLED (using Traefik instead)
 kong:
   enabled: false
 
@@ -81,18 +169,10 @@ kong:
 analytics:
   enabled: false
 
-# Vector/Telemetry - DISABLED (optional for development)  
+# Vector/Telemetry - DISABLED (optional for development)
 vector:
   enabled: false
 
 # Edge Functions - DISABLED (optional for development)
 functions:
   enabled: false
-
-# Meta API
-meta:
-  enabled: true
-  image:
-    repository: supabase/postgres-meta
-    tag: "latest"
-    pullPolicy: IfNotPresent

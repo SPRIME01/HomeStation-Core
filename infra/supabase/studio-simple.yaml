@@ -1,0 +1,51 @@
+---
+# Simple Supabase Studio for immediate access
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-studio-simple
+  namespace: supabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supabase-studio-simple
+  template:
+    metadata:
+      labels:
+        app: supabase-studio-simple
+    spec:
+      containers:
+      - name: studio
+        image: supabase/studio:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: STUDIO_PG_META_URL
+          value: "http://localhost:8080"
+        - name: DEFAULT_ORGANIZATION_NAME
+          value: "HomeStation"
+        - name: DEFAULT_PROJECT_NAME  
+          value: "homelab"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-studio-simple
+  namespace: supabase
+spec:
+  selector:
+    app: supabase-studio-simple
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30080
+  type: NodePort

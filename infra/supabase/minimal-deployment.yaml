@@ -1,0 +1,108 @@
+# Simplified Supabase Configuration with Proven Images
+# This file provides a working Supabase setup using images we know exist
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supabase-minimal-config
+  namespace: supabase
+data:
+  minimal-values.yaml: |
+    # Use official PostgreSQL instead of Supabase-specific images
+    db:
+      enabled: true
+      image:
+        repository: postgres
+        tag: "15-alpine"
+        pullPolicy: IfNotPresent
+      environment:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: "${SUPABASE_DB_PASSWORD}"
+
+    # Disable services that need custom Supabase images for now
+    auth:
+      enabled: false
+    rest:
+      enabled: false
+    realtime:
+      enabled: false
+    storage:
+      enabled: false
+    studio:
+      enabled: false
+    meta:
+      enabled: false
+
+    # Keep simple services
+    imgproxy:
+      enabled: true
+      image:
+        repository: darthsim/imgproxy
+        tag: "latest"
+
+    # Disabled services
+    kong:
+      enabled: false
+    analytics:
+      enabled: false
+    vector:
+      enabled: false
+    functions:
+      enabled: false
+
+---
+# Simple PostgreSQL deployment for testing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-simple
+  namespace: supabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-simple
+  template:
+    metadata:
+      labels:
+        app: postgres-simple
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_DB
+          value: postgres
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: supabase-db
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: supabase-db
+              key: password
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-data
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-simple
+  namespace: supabase
+spec:
+  selector:
+    app: postgres-simple
+  ports:
+  - port: 5432
+    targetPort: 5432
+  type: ClusterIP

@@ -1,0 +1,132 @@
+# Traefik IngressRoutes for Supabase Services
+# This provides external access to Supabase through Traefik with proper routing
+
+---
+# Supabase Studio (Dashboard) - HTTP and HTTPS
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-studio-http
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`supabase.homestation.local`) || Host(`studio.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-studio-working
+          port: 3000
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-studio
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`supabase.homestation.local`) || Host(`studio.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-studio-working
+          port: 3000
+  tls:
+    certResolver: letsencrypt
+
+---
+# Supabase REST API
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-rest-api
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`api.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-rest
+          port: 3000
+  tls:
+    certResolver: letsencrypt
+
+---
+# Supabase Auth (GoTrue)
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-auth
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`auth.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-auth
+          port: 9999
+  tls:
+    certResolver: letsencrypt
+
+---
+# Supabase Realtime
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-realtime
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`realtime.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-realtime
+          port: 4000
+  tls:
+    certResolver: letsencrypt
+
+---
+# Supabase Storage
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-storage
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`storage.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-storage
+          port: 5000
+  tls:
+    certResolver: letsencrypt
+
+---
+# Supabase Meta API
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-meta
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`meta.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-meta
+          port: 8080
+  tls:
+    certResolver: letsencrypt

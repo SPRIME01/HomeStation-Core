@@ -48,7 +48,27 @@ supabase_secrets:
 # 3️⃣.4 Complete Supabase setup (generate JWT + create secrets + restart pods)
 setup_supabase: generate_supabase_jwt supabase_secrets
     kubectl rollout restart -n supabase deployment
+    kubectl apply -f infra/supabase/traefik-ingress.yaml
     echo "🎉 Supabase setup complete! Check pod status with: kubectl get pods -n supabase"
+
+# 3️⃣.5 Deploy minimal Supabase (PostgreSQL only for testing)
+deploy_supabase_minimal:
+    kubectl apply -f infra/supabase/minimal-deployment.yaml
+    echo "✅ Minimal Supabase deployed. Check: kubectl get pods -n supabase"
+
+# 3️⃣.6 Check Supabase status
+supabase_status:
+    echo "🔍 Supabase Pods Status:"
+    kubectl get pods -n supabase
+    echo ""
+    echo "🔍 Supabase Secrets:"
+    kubectl get secrets -n supabase
+    echo ""
+    echo "🔍 Traefik IngressRoutes:"
+    kubectl get ingressroutes -n supabase
+    echo ""
+    echo "🔍 ArgoCD Application Status:"
+    kubectl get applications -n argocd supabase
 
 # 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
 provision_core:

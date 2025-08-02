@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: supabase-pre-install
+  namespace: supabase
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: pre-install
+        image: alpine/k8s:1.28.2
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+          echo "🔍 Checking Supabase prerequisites..."
+
+          # Check if secrets exist
+          REQUIRED_SECRETS=("supabase-jwt" "supabase-db" "supabase-analytics" "supabase-s3" "supabase-smtp" "supabase-dashboard")
+
+          for secret in "${REQUIRED_SECRETS[@]}"; do
+            if ! kubectl get secret "$secret" -n supabase >/dev/null 2>&1; then
+              echo "❌ Required secret '$secret' not found!"
+              echo "💡 Run 'just setup_supabase' to create all required secrets"
+              exit 1
+            else
+              echo "✅ Secret '$secret' found"
+            fi
+          done
+
+          echo "🎉 All prerequisites satisfied!"
+          echo "🚀 Supabase is ready for deployment"
+      serviceAccountName: default

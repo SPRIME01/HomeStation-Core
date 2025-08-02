@@ -1,0 +1,84 @@
+---
+# Working Supabase Studio Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase-studio-working
+  namespace: supabase
+  labels:
+    app: supabase-studio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supabase-studio
+  template:
+    metadata:
+      labels:
+        app: supabase-studio
+    spec:
+      containers:
+      - name: studio
+        image: supabase/studio:20240326-5e5586d
+        ports:
+        - containerPort: 3000
+        env:
+        - name: STUDIO_PG_META_URL
+          value: "http://supabase-supabase-meta:8080"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: supabase-db
+              key: password
+        - name: SUPABASE_URL
+          value: "https://api.supabase.homestation.local"
+        - name: SUPABASE_ANON_KEY
+          valueFrom:
+            secretKeyRef:
+              name: supabase-jwt
+              key: anonKey
+        - name: SUPABASE_SERVICE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: supabase-jwt
+              key: serviceKey
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-studio-working
+  namespace: supabase
+spec:
+  selector:
+    app: supabase-studio
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: ClusterIP
+
+---
+# Traefik IngressRoute for Studio
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-studio-working
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`studio.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-studio-working
+          port: 3000
+  tls:
+    certResolver: letsencrypt
