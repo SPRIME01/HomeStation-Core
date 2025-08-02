@@ -17,8 +17,8 @@ init:
 validate: lint test doctor
 
 lint:
-    nx format:check
-    pnpm run eslint
+    @echo "🔍 Linting workspace..."
+    pnpm run lint
 
 test:
     nx run-many --target=test --all

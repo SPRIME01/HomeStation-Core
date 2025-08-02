@@ -34,11 +34,15 @@ kubectl -n vault exec vault-0 -- vault status
    - Password: homelab-secure-db-password
    - Database: postgres
 
-3. **API Gateway (Kong)**
+3. **Direct API Access (via Traefik)**
    ```bash
-   kubectl port-forward -n supabase svc/supabase-supabase-kong 8000:80
+   # Access REST API directly via Traefik
+   curl -k https://192.168.0.50:32184/rest/v1/
    ```
-   - API Base: http://localhost:8000
+   - REST API: https://api.supabase.homestation.local:32184/
+   - Auth API: https://auth.supabase.homestation.local:32184/
+   - Storage API: https://storage.supabase.homestation.local:32184/
+   - Realtime: wss://realtime.supabase.homestation.local:32184/
 
 ### 🔑 API Keys
 
@@ -50,12 +54,12 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.jwt-secret}'
 kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}' | base64 -d
 ```
 
-### 📡 API Endpoints
+### 📡 API Endpoints (via Traefik)
 
-- **REST API**: http://localhost:8000/rest/v1/
-- **Auth API**: http://localhost:8000/auth/v1/
-- **Storage API**: http://localhost:8000/storage/v1/
-- **Realtime**: ws://localhost:8000/realtime/v1/
+- **REST API**: https://api.supabase.homestation.local:32184/rest/v1/
+- **Auth API**: https://auth.supabase.homestation.local:32184/auth/v1/
+- **Storage API**: https://storage.supabase.homestation.local:32184/storage/v1/
+- **Realtime**: wss://realtime.supabase.homestation.local:32184/realtime/v1/
 
 ## 🔐 HashiCorp Vault Access
 

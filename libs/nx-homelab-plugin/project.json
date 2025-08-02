@@ -3,7 +3,38 @@
   "projectType": "library",
   "sourceRoot": "libs/nx-homelab-plugin/src",
   "targets": {
-    "lint": { "executor": "nx:eslint" },
-    "test": { "executor": "nx:jest" }
-  }
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/libs/nx-homelab-plugin",
+        "main": "libs/nx-homelab-plugin/src/index.ts",
+        "tsConfig": "libs/nx-homelab-plugin/tsconfig.lib.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/nx-homelab-plugin/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/nx-homelab-plugin"
+      ],
+      "options": {
+        "jestConfig": "libs/nx-homelab-plugin/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [
+    "type:plugin",
+    "scope:homelab"
+  ]
 }

@@ -41,9 +41,8 @@ data:
         repository: darthsim/imgproxy
         tag: "latest"
 
-    # Disabled services
-    kong:
-      enabled: false
+    # Disabled services - Kong completely removed
+    # All routing handled by Traefik IngressRoutes instead
     analytics:
       enabled: false
     vector:

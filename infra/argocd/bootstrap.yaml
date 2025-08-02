@@ -198,9 +198,8 @@ spec:
             tag: "latest"
             pullPolicy: IfNotPresent
 
-        # Kong Gateway - DISABLED (using Traefik instead)
-        kong:
-          enabled: false
+        # Kong Gateway - COMPLETELY REMOVED (using Traefik instead)
+        # All API routing handled by Traefik IngressRoutes
 
         # Optional services - DISABLED for simplicity
         analytics:

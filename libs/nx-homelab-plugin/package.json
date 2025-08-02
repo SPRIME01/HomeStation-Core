@@ -2,12 +2,13 @@
   "name": "@org/nx-homelab-plugin",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "generators.json",
+  "generators": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "18.0.0",
-    "@nrwl/node": "18.0.0"
+    "@nx/devkit": "21.3.10",
+    "@nx/node": "21.3.10"
+  },
+  "nx": {
+    "sourceRoot": "libs/nx-homelab-plugin/src"
   }
 }
-
-

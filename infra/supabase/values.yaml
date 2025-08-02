@@ -161,9 +161,10 @@ meta:
       cpu: "100m"
     limits:
       memory: "256Mi"
-      cpu: "300m"# Kong Gateway - DISABLED (using Traefik instead)
-kong:
-  enabled: false
+      cpu: "300m"
+
+# Kong Gateway - COMPLETELY REMOVED (using Traefik instead)
+# No Kong configuration needed - all routing handled by Traefik IngressRoutes
 
 # Analytics - DISABLED (optional for development)
 analytics:

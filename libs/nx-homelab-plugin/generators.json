@@ -1,0 +1,19 @@
+{
+    "generators": {
+        "argo-app": {
+            "factory": "./generators/argo-app/generator",
+            "schema": "./generators/argo-app/schema.json",
+            "description": "Generate an ArgoCD application"
+        },
+        "service": {
+            "factory": "./generators/service/generator",
+            "schema": "./generators/service/schema.json",
+            "description": "Generate a new service"
+        },
+        "vault-secret": {
+            "factory": "./generators/vault-secret/generator",
+            "schema": "./generators/vault-secret/schema.json",
+            "description": "Generate a Vault secret policy"
+        }
+    }
+}

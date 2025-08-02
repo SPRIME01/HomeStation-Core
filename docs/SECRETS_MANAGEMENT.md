@@ -89,7 +89,7 @@ kubectl port-forward -n vault svc/vault 8200:8200
    ```
 
 ### Daily Operations
-- **Access Supabase**: http://localhost:8000 (Kong gateway)
+- **Access Supabase Studio**: https://studio.homestation.local:32184 (via Traefik)
 - **Access Vault**: http://localhost:8200 (Vault UI)
 - **Check Status**: `kubectl get applications -n argocd`
 

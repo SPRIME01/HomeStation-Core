@@ -1,0 +1,24 @@
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31m[31m[1m[1m● [22m[1mValidation Error[22m:[39m[31m[39m
+
+[31m[39m
+[31m  Preset [1m../../jest.preset.js[22m is invalid:[39m
+[31m[39m
+[31m  getJestConfig is not a function[39m
+[31m  TypeError: getJestConfig is not a function[39m
+[31m    at Object.<anonymous> (/home/prime/homelab/jest.preset.js:3:18)[39m
+[31m    at Module._compile (node:internal/modules/cjs/loader:1688:14)[39m
+[31m    at Object..js (node:internal/modules/cjs/loader:1820:10)[39m
+[31m    at Module.load (node:internal/modules/cjs/loader:1423:32)[39m
+[31m    at Function._load (node:internal/modules/cjs/loader:1246:12)[39m
+[31m    at TracingChannel.traceSync (node:diagnostics_channel:322:14)[39m
+[31m    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)[39m
+[31m    at Module.require (node:internal/modules/cjs/loader:1445:12)[39m
+[31m    at require (node:internal/modules/helpers:135:16)[39m
+[31m    at requireOrImportModule (/home/prime/homelab/node_modules/.pnpm/jest-util@30.0.5/node_modules/jest-util/build/index.js:1010:28)[39m
+[31m[39m
+[31m  [1mConfiguration Documentation:[22m[39m
+[31m  https://jestjs.io/docs/configuration[39m
+[31m[39m
+Pass --verbose to see the stacktrace.
+

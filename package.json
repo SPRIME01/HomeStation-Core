@@ -5,16 +5,37 @@
   "scripts": {
     "format": "nx format:write",
     "lint": "nx run-many --target=lint --all",
-    "test": "nx run-many --target=test --all"
+    "test": "nx run-many --target=test --all",
+    "affected:lint": "nx affected --target=lint",
+    "affected:test": "nx affected --target=test",
+    "affected:build": "nx affected --target=build"
   },
   "devDependencies": {
-    "@nrwl/devkit": "18.0.0",
-    "@nrwl/node": "18.0.0",
+    "@nx/devkit": "21.3.10",
+    "@nx/eslint": "21.3.10",
+    "@nx/eslint-plugin": "^21.3.11",
+    "@nx/jest": "21.3.10",
+    "@nx/js": "21.3.10",
+    "@nx/node": "21.3.10",
+    "@nx/workspace": "21.3.10",
     "@org/nx-homelab-plugin": "workspace:*",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^8.57.0",
+    "jest": "^30.0.5",
+    "nx": "21.3.10",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.4.0",
     "typescript": "5.4.4"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.10",
     "jsonwebtoken": "^9.0.2"
-  }
+  },
+  "workspaces": [
+    "libs/*",
+    "apps/*"
+  ]
 }
