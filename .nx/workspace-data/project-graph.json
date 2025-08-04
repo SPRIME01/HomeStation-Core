@@ -79,13 +79,95 @@
         },
         "implicitDependencies": []
       }
+    },
+    "infrastructure": {
+      "name": "infrastructure",
+      "type": "lib",
+      "data": {
+        "root": "infrastructure",
+        "name": "infrastructure",
+        "$schema": "../node_modules/nx/schemas/project-schema.json",
+        "projectType": "library",
+        "sourceRoot": "infrastructure",
+        "tags": [
+          "scope:infrastructure",
+          "type:iac"
+        ],
+        "targets": {
+          "pulumi:preview": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "pulumi preview",
+              "cwd": "infrastructure/pulumi"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "pulumi:up": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "pulumi up --yes",
+              "cwd": "infrastructure/pulumi"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "pulumi:destroy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "pulumi destroy --yes",
+              "cwd": "infrastructure/pulumi"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "ansible:setup": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "ansible-playbook playbooks/setup.yml",
+              "cwd": "infrastructure/ansible"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "ansible:deploy": {
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "ansible-playbook playbooks/deploy-supabase.yml",
+              "cwd": "infrastructure/ansible"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "executor": "nx:run-commands",
+            "options": {
+              "commands": [
+                "ansible-lint playbooks/ || echo 'Install ansible-lint: pip install ansible-lint'",
+                "pulumi preview --diff || echo 'Pulumi not configured'"
+              ],
+              "parallel": false,
+              "cwd": "infrastructure"
+            },
+            "configurations": {},
+            "parallelism": true,
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json"
+            ],
+            "cache": true
+          }
+        },
+        "implicitDependencies": []
+      }
     }
   },
   "externalNodes": {},
   "dependencies": {
-    "nx-homelab-plugin": []
+    "nx-homelab-plugin": [],
+    "infrastructure": []
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1754162118967
+  "computedAt": 1754331428825
 }

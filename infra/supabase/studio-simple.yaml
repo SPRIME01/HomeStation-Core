@@ -22,7 +22,7 @@ spec:
         - containerPort: 3000
         env:
         - name: STUDIO_PG_META_URL
-          value: "http://localhost:8080"
+          value: "http://supabase-supabase-meta:8080"
         - name: DEFAULT_ORGANIZATION_NAME
           value: "HomeStation"
         - name: DEFAULT_PROJECT_NAME

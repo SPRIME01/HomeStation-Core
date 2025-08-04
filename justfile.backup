@@ -1,0 +1,417 @@
+set dotenv-load
+
+# ───────────── Common vars ─────────────
+KUBECONFIG := env_var('HOME') + '/.kube/config'
+NAMESPACE := "dev"
+PLATFORM := "homelab"
+
+# ───────────── Core commands ─────────────
+
+# 1️⃣ Initialise workspace (node+pnpm, husky, commitlint, pre-commit)
+init:
+    npm i -g nx pnpm@latest
+    pnpm install
+    git config core.hooksPath .husky
+
+# 2️⃣ Validate cluster health & lint code
+validate: lint test doctor
+
+lint:
+    @echo "🔍 Linting workspace..."
+    pnpm run lint
+
+test:
+    nx run-many --target=test --all
+
+doctor:
+    bash scripts/doctor.sh {{KUBECONFIG}}
+
+# 3️⃣ Bootstrap secrets backend (HashiCorp Vault in K3s)
+vault_init:
+    kubectl -n vault wait --for=condition=ready pod/vault-0 --timeout=300s
+    kubectl -n vault exec -it vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > vault-init.json
+    jq -r '.unseal_keys_b64[0]' vault-init.json | kubectl -n vault exec -i vault-0 -- vault operator unseal -
+    echo "Vault initialised & unsealed✅"
+
+# 3️⃣.1 Setup Vault admin users and policies
+vault_setup:
+    bash scripts/setup-vault.sh
+
+# 3️⃣.2 Generate Supabase JWT secrets (run this first!)
+generate_supabase_jwt:
+    node scripts/generate-supabase-jwt.js
+
+# 3️⃣.3 Setup Supabase secrets from .env
+supabase_secrets:
+    bash scripts/setup-supabase-secrets.sh
+
+# 3️⃣.4 Complete Supabase setup (generate JWT + create secrets + restart pods)
+setup_supabase: generate_supabase_jwt supabase_secrets
+    kubectl rollout restart -n supabase deployment
+    kubectl apply -f infra/supabase/traefik-ingress.yaml
+    echo "🎉 Supabase setup complete! Check pod status with: kubectl get pods -n supabase"
+quick_ui_access:
+    @echo "🎯 WORKING UI Access (Rancher Desktop Compatible):"
+    @echo ""
+    @echo "✅ Supabase Studio:"
+    @echo "   🌐 http://localhost:30080"
+    @echo "   📝 NodePort access via Rancher Desktop"
+    @echo ""
+    @echo "✅ Vault UI:"
+    @echo "   🌐 http://localhost:8201"
+    @echo "   🔐 Port forward already active"
+    @echo ""
+    @echo "⚠️  Traefik Dashboard:"
+    @echo "   🌐 http://localhost:8082 (API working, dashboard investigating)"
+    @echo ""
+    @echo "💡 All services are accessible immediately!"
+
+# 3️⃣.7 Check Traefik status and dashboard access
+traefik_status:
+    echo "🌐 Traefik Status:"
+    kubectl get all -n kube-system | grep traefik
+    echo ""
+    echo "🔍 Traefik Service Details:"
+    kubectl get svc traefik -n kube-system -o wide
+    echo ""
+    echo "🚦 All IngressRoutes:"
+    kubectl get ingressroutes -A
+    echo ""
+    echo "� Traefik Dashboard Access:"
+    echo "  API: http://localhost:8082 (port forward active)"
+    echo ""
+    echo "🔍 Recent Traefik Logs:"
+    kubectl logs deployment/traefik -n kube-system --tail=5
+
+# 3️⃣.8 Install MetalLB LoadBalancer
+vault_init:
+    kubectl -n vault wait --for=condition=ready pod/vault-0 --timeout=300s
+    kubectl -n vault exec -it vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > vault-init.json
+    jq -r '.unseal_keys_b64[0]' vault-init.json | kubectl -n vault exec -i vault-0 -- vault operator unseal -
+    echo "Vault initialised & unsealed✅"
+
+# 3️⃣.1 Setup Vault admin users and policies
+vault_setup:
+    bash scripts/setup-vault.sh
+
+# 3️⃣.2 Generate Supabase JWT secrets (run this first!)
+generate_supabase_jwt:
+    node scripts/generate-supabase-jwt.js
+
+# 3️⃣.3 Setup Supabase secrets from .env
+supabase_secrets:
+    bash scripts/setup-supabase-secrets.sh
+
+# 3️⃣.4 Complete Supabase setup (generate JWT + create secrets + restart pods)
+setup_supabase: generate_supabase_jwt supabase_secrets
+    kubectl rollout restart -n supabase deployment
+    kubectl apply -f infra/supabase/traefik-ingress.yaml
+    echo "🎉 Supabase setup complete! Check pod status with: kubectl get pods -n supabase"
+
+# 3️⃣.5 Deploy minimal Supabase (PostgreSQL only for testing)
+deploy_supabase_minimal:
+    kubectl apply -f infra/supabase/minimal-deployment.yaml
+    echo "✅ Minimal Supabase deployed. Check: kubectl get pods -n supabase"
+
+# 3️⃣.6 Check Supabase status
+supabase_status:
+    echo "🔍 Supabase Pods Status:"
+    kubectl get pods -n supabase
+    echo ""
+    echo "🔍 Supabase Secrets:"
+    kubectl get secrets -n supabase
+    echo ""
+    echo "🔍 Traefik IngressRoutes:"
+    kubectl get ingressroutes -n supabase
+    echo ""
+    echo "🔍 Traefik Service & LoadBalancer:"
+    kubectl get svc traefik -n traefik-system
+    echo ""
+    echo "🔍 ArgoCD Application Status:"
+    kubectl get applications -n argocd supabase
+
+# 3️⃣.7 Check Traefik status and dashboard access
+traefik_status:
+    echo "🌐 Traefik Status:"
+    kubectl get all -n traefik-system
+    echo ""
+    echo "🔍 Traefik Service Details:"
+    kubectl get svc traefik -n traefik-system -o wide
+    echo ""
+    echo "🚦 All IngressRoutes:"
+    kubectl get ingressroutes -A
+    echo ""
+    echo "📊 Traefik Dashboard Access:"
+    echo "  HTTP:  http://localhost:30413 (if port-forward needed)"
+    echo "  HTTPS: https://localhost:32184 (if port-forward needed)"
+    echo ""
+    echo "🔍 Recent Traefik Logs:"
+    kubectl logs deployment/traefik -n traefik-system --tail=5
+
+# 3️⃣.8 Install MetalLB LoadBalancer
+install_metallb:
+    @echo "🔧 Installing MetalLB LoadBalancer..."
+    @echo "📦 Installing MetalLB CRDs and components..."
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.3/config/manifests/metallb-native.yaml
+    @echo "⏳ Waiting for MetalLB to be ready..."
+    kubectl wait --namespace metallb-system --for=condition=ready pod --selector=app=metallb --timeout=90s
+    @echo "🏗️  Creating IPAddressPool and L2Advertisement..."
+    kubectl apply -f infra/metallb/ip-pool.yaml
+    @echo "✅ MetalLB installed! LoadBalancer services will now get external IPs."
+
+# 3️⃣.13 Setup JWT authentication for Vault
+setup_vault_jwt:
+    @echo "🔐 Setting up JWT authentication for Vault..."
+    bash scripts/setup-vault-jwt.sh
+
+# 3️⃣.14 Test JWT login to Vault
+test_vault_jwt:
+    @echo "🧪 Testing JWT login to Vault..."
+    @echo "📝 Using JWT token from .env file..."
+    bash -c 'source .env && kubectl exec -n vault vault-0 -- vault write auth/jwt/login role=homelab-user jwt="$$VAULT_JWT_SECRET"'
+
+# 3️⃣.18 WSL2/Rancher Desktop Access Solution (EXPERT APPROACH)
+wsl2_access:
+    @echo "🔧 WSL2/Rancher Desktop Network Analysis:"
+    @echo "════════════════════════════════════════════════════"
+    @echo ""
+    @echo "🏗️  Cluster Architecture:"
+    @echo "   • Kubernetes: k3s in WSL2 ($(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')"
+    @echo "   • WSL2 Host IP: $(ip addr show eth0 | grep -o '172\.[0-9]*\.[0-9]*\.[0-9]*' | head -1)"
+    @echo "   • Windows Host IP: $(ip addr show eth0 | grep -o '192\.168\.0\.[0-9]*' | head -1)"
+    @echo ""
+    @echo "📊 Available Services & Ports:"
+    @echo "   • Traefik (k3s): HTTP=32096, HTTPS=31239"
+    @echo "   • Traefik (ArgoCD): HTTP=30413, HTTPS=32184"
+    @echo "   • Supabase Studio: NodePort=30080"
+    @echo ""
+    @echo "✅ WORKING Access Methods:"
+    @echo "   1. Port-forward (recommended): kubectl port-forward ..."
+    @echo "   2. Rancher Desktop tunnels: Configure in RD settings"
+    @echo "   3. Direct pod exec for testing"
+    @echo ""
+    @echo "❌ Why LoadBalancer IPs don't work:"
+    @echo "   • MetalLB assigns IPs within k3s cluster network"
+    @echo "   • WSL2 doesn't bridge these to Windows host"
+    @echo "   • Need port-forward or Rancher Desktop port tunneling"
+
+# 3️⃣.19 Setup Port Forwarding for All Services (WORKING SOLUTION)
+setup_port_forwards:
+    @echo "🚀 Setting up port forwards for WSL2/Rancher Desktop..."
+    @echo ""
+    @echo "📊 Starting Traefik Dashboard..."
+    kubectl port-forward -n kube-system deployment/traefik 8080:9000 > /dev/null 2>&1 &
+    @echo "   → http://localhost:8080"
+    @echo ""
+    @echo "🐘 Starting Supabase Studio..."
+    kubectl port-forward -n supabase svc/supabase-studio-simple 3000:3000 > /dev/null 2>&1 &
+    @echo "   → http://localhost:3000"
+    @echo ""
+    @echo "🔐 Starting Vault UI..."
+    kubectl port-forward -n vault svc/vault-ui 8200:8200 > /dev/null 2>&1 &
+    @echo "   → http://localhost:8200"
+    @echo ""
+    @echo "✅ All services accessible via localhost!"
+    @echo "💡 To stop: pkill -f 'kubectl port-forward'"
+
+# 3️⃣.20 Test Direct Pod Access (Debugging)
+test_pod_access:
+    @echo "🧪 Testing direct pod connectivity..."
+    @echo ""
+    @echo "📊 Traefik Health Check:"
+    kubectl exec -n kube-system deployment/traefik -- wget -qO- http://localhost:9000/ping || echo "Traefik not responding"
+    @echo ""
+    @echo "🐘 Supabase Studio Health Check:"
+    kubectl exec -n supabase deployment/supabase-studio-simple -- curl -s http://localhost:3000 | head -c 100 || echo "Supabase not responding"
+    @echo ""
+    @echo "🔐 Vault Health Check:"
+    kubectl exec -n vault vault-0 -- wget -qO- http://localhost:8200/v1/sys/health || echo "Vault not responding"
+
+# 3️⃣.15 Quick access via port-forward (immediate solution)
+quick_access:
+    @echo "🎯 Quick Access to UIs (WORKING METHODS):"
+    @echo ""
+    @echo "✅ Supabase Studio (NodePort - WORKS NOW!):"
+    @echo "   🌐 http://localhost:30080"
+    @echo "   🌐 http://192.168.0.50:30080"
+    @echo ""
+    @echo "🔐 Vault UI (Port Forward):"
+    @echo "   kubectl port-forward -n vault svc/vault-ui 8200:8200"
+    @echo "   Then visit: http://localhost:8200"
+    @echo ""
+    @echo "📊 Traefik Dashboard (Port Forward):"
+    @echo "   kubectl port-forward -n traefik-system svc/traefik 8080:9000"
+    @echo "   Then visit: http://localhost:8080"
+    @echo ""
+    @echo "💡 Or try the direct NodePort access:"
+    @echo "   Traefik HTTP:  http://192.168.0.50:30413"
+    @echo "   Traefik HTTPS: https://192.168.0.50:32184"
+
+# 3️⃣.16 Start port forwarding for all UIs (run in background)
+start_port_forwards:
+    @echo "🚀 Starting port forwards for all services..."
+    @echo "📊 Traefik Dashboard: http://localhost:8080"
+    kubectl port-forward -n kube-system svc/traefik 8080:8080 &
+    @echo "🐘 Supabase Studio: http://localhost:3000"
+    kubectl port-forward -n supabase svc/supabase-studio-simple 3000:3000 &
+    @echo "🔐 Vault UI: http://localhost:8201"
+    kubectl port-forward -n vault svc/vault-ui 8201:8200 &
+    @echo ""
+    @echo "✅ All port forwards started in background!"
+    @echo "💡 To stop them: just stop_port_forwards"
+
+# 3️⃣.17 Stop all port forwards
+stop_port_forwards:
+    @echo "⏹️  Stopping all port forwards..."
+    pkill -f "kubectl port-forward" || echo "No port forwards running"
+    @echo "✅ All port forwards stopped"
+
+# 3️⃣.14 Setup production domains with your Cloudflare domain
+setup_production_domains:
+    @echo "🌐 Setting up production domains with primefam.cloud..."
+    kubectl apply -f infra/production-ingress.yaml
+    @echo "✅ Production IngressRoutes created!"
+    @echo ""
+    @echo "🎯 Your services will be available at:"
+    @echo "   🚦 Traefik Dashboard: https://traefik.homelab.primefam.cloud"
+    @echo "   🐘 Supabase Studio:   https://supabase.homelab.primefam.cloud"
+    @echo "   🔐 Vault UI:          https://vault.homelab.primefam.cloud"
+    @echo ""
+    @echo "⚠️  Make sure these DNS records point to your external IP:"
+    @echo "   traefik.homelab.primefam.cloud  → $(kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
+    @echo "   supabase.homelab.primefam.cloud → $(kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
+    @echo "   vault.homelab.primefam.cloud    → $(kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
+
+# 3️⃣.10 Access Supabase Studio UI
+supabase_ui:
+    @echo "🎯 Supabase Studio UI Access Options:"
+    @echo ""
+    @echo "🌐 Via Production Domain (if DNS configured):"
+    @echo "   https://supabase.homelab.primefam.cloud"
+    @echo ""
+    @echo "🔗 Via Port Forward (Always works locally):"
+    @echo "   kubectl port-forward -n supabase svc/supabase-studio-simple 3000:3000"
+    @echo "   Then visit: http://localhost:3000"
+    @echo ""
+    @echo "📊 Via LoadBalancer IP (NodePort):"
+    @echo "   http://192.168.0.241:30080"
+    @echo ""
+    @echo "💡 If domains don't work, use port-forward method above"
+
+# 3️⃣.11 Open Traefik Dashboard
+traefik_dashboard:
+    @echo "🚀 Traefik Dashboard Access Options:"
+    @echo ""
+    @echo "🌐 Via Production Domain (if DNS configured):"
+    @echo "   https://traefik.homelab.primefam.cloud"
+    @echo ""
+    @echo "🔗 Via Port Forward (Always works locally):"
+    @echo "   kubectl port-forward -n kube-system svc/traefik 8080:8080"
+    @echo "   Then visit: http://localhost:8080"
+    @echo ""
+    @echo "📊 Via LoadBalancer IP + NodePort:"
+    @echo "   http://192.168.0.240:32096 (but dashboard might not be exposed)"
+
+# 3️⃣.12 Access Vault UI
+vault_ui:
+    @echo "� Vault UI Access Options:"
+    @echo ""
+    @echo "🌐 Via Production Domain (if DNS configured):"
+    @echo "   https://vault.homelab.primefam.cloud"
+    @echo ""
+    @echo "🔗 Via Port Forward (Always works locally):"
+    @echo "   kubectl port-forward -n vault svc/vault-ui 8200:8200"
+    @echo "   Then visit: http://localhost:8200"
+    @echo ""
+    @echo "🔑 Login with:"
+    @echo "   • Token: root (for admin access)"
+    @echo "   • Or use your JWT token from .env file"
+
+# 3️⃣.9 Get network information for MetalLB configuration
+network_info:
+    @echo "🌐 Network Information for MetalLB Configuration:"
+    @echo "📍 Your current IP: $(ip route get 1.1.1.1 | head -1 | cut -d' ' -f7)"
+    @echo "🏠 Your gateway: $(ip route | grep default | cut -d' ' -f3)"
+    @echo "📡 Your network range: $(ip route | grep -E '192\.168\.|10\.|172\.' | head -1 | cut -d' ' -f1)"
+    @echo ""
+    @echo "💡 Suggested MetalLB IP range:"
+    @echo "   If your IP is 192.168.1.x, use: 192.168.1.240-192.168.1.250"
+    @echo "   If your IP is 192.168.0.x, use: 192.168.0.240-192.168.0.250"
+
+# 4️⃣ Provision core stack (Traefik, ArgoCD, Supabase, etc.) via Argo "app of apps"
+provision_core:
+    kubectl apply -f infra/argocd/bootstrap.yaml
+    echo "⌛ Waiting for ArgoCD applications to sync..."
+    kubectl wait --for=condition=Synced --timeout=600s application --all -n argocd
+
+# 5️⃣ Generate new artefacts using Nx plugin wrappers
+
+generate-service name:
+    nx g @org/nx-homelab-plugin:service --name "{{name}}"
+
+generate-argo-app name src:
+    nx g @org/nx-homelab-plugin:argo-app --name "{{name}}" --source "{{src}}" --namespace $(NAMESPACE)
+
+generate-vault-secret path policy:
+    nx g @org/nx-homelab-plugin:vault-secret --path "{{path}}" --policy "{{policy}}"
+
+# 6️⃣ Deploy to cluster (push manifests, ArgoCD sync)
+deploy:
+    git push origin HEAD
+    bash scripts/argo-sync.sh {{NAMESPACE}}
+
+# 7️⃣ Quality gate for merges
+pre-merge: validate
+
+# 8️⃣ Infrastructure as Code (Pulumi)
+pulumi-install:
+    @echo "📦 Installing Pulumi dependencies..."
+    cd infrastructure/pulumi && pnpm install
+
+pulumi-preview:
+    @echo "🔍 Previewing infrastructure changes with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi preview'
+
+pulumi-up:
+    @echo "🚀 Deploying infrastructure with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi up'
+
+pulumi-destroy:
+    @echo "💥 Destroying infrastructure with Pulumi..."
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi destroy'
+
+pulumi-init stack:
+    @echo "🏗️ Initializing Pulumi stack: {{stack}}"
+    cd infrastructure/pulumi && pulumi stack init {{stack}}
+
+pulumi-init-default:
+    @echo "🏗️ Initializing default Pulumi stack: homelab-dev"
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi login --local'
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi stack init homelab-dev || echo "Stack already exists"'
+    cd infrastructure/pulumi && bash -c 'source ../../.env && export PULUMI_CONFIG_PASSPHRASE && pulumi config set kubeconfig ~/.kube/config'
+
+# 9️⃣ Configuration Management (Ansible)
+ansible-setup:
+    @echo "⚙️ Setting up homelab with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/setup.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-deploy-supabase:
+    @echo "🐘 Deploying Supabase with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/deploy-supabase.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-backup:
+    @echo "💾 Creating homelab backup with Ansible..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible-playbook playbooks/backup.yml --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+ansible-ping:
+    @echo "🏓 Testing Ansible connectivity..."
+    cd infrastructure/ansible && bash -c 'source ../../.env && echo "$ANSIBLE_BECOME_PASSWORD" > /tmp/ansible_pass && ansible all -m ping --become --become-password-file=/tmp/ansible_pass; rm /tmp/ansible_pass'
+
+# 🔟 Complete infrastructure setup
+infra-init: pulumi-install pulumi-init-default ansible-setup
+    @echo "🎉 Infrastructure initialization complete!"
+
+infra-deploy: pulumi-up ansible-deploy-supabase
+    @echo "🚀 Infrastructure deployment complete!"
+
+# .PHONY: init lint test doctor validate vault_init provision_core generate-service generate-argo-app generate-vault-secret deploy pre-merge pulumi-install pulumi-preview pulumi-up pulumi-destroy pulumi-init pulumi-init-default ansible-setup ansible-deploy-supabase ansible-backup infra-init infra-deploy

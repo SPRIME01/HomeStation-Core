@@ -1,0 +1,54 @@
+---
+# Production IngressRoute for Traefik Dashboard (Rancher Integrated)
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-prod
+  namespace: kube-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`traefik.homelab.primefam.cloud`)
+      services:
+        - name: api@internal
+          kind: TraefikService
+  tls:
+    certResolver: letsencrypt
+---
+# Production IngressRoute for Supabase Studio
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-studio-prod
+  namespace: supabase
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`supabase.homelab.primefam.cloud`)
+      services:
+        - name: supabase-studio-working
+          port: 3000
+  tls:
+    certResolver: letsencrypt
+---
+# Production IngressRoute for Vault UI
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vault-ui-prod
+  namespace: vault
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`vault.homelab.primefam.cloud`)
+      services:
+        - name: vault-ui
+          port: 8200
+  tls:
+    certResolver: letsencrypt
