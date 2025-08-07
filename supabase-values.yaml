@@ -1,0 +1,35 @@
+auth:
+  image:
+    tag: "v20241009-b3db6a9"
+
+meta:
+  image:
+    tag: "v0.84.2"
+
+realtime:
+  image:
+    tag: "v2.30.23"
+
+rest:
+  image:
+    tag: "v12.2.3"
+
+studio:
+  image:
+    tag: "latest"
+
+storage:
+  image:
+    tag: "v1.11.6"
+
+kong:
+  image:
+    tag: "2.8.1"
+
+db:
+  image:
+    tag: "15.6.1.147"
+
+imgproxy:
+  image:
+    tag: "v3.8.0"

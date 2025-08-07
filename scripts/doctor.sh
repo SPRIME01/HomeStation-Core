@@ -28,7 +28,11 @@ kubectl --kubeconfig "$KCFG" get deploy argocd-server -n argocd &>/dev/null && e
 
 # Check Vault
 printf "🔐 Checking Vault..."
-kubectl --kubeconfig "$KCFG" get deploy vault -n vault &>/dev/null && echo " ✅" || echo " ❌"
+if kubectl --kubeconfig "$KCFG" get pod -n vault -l app.kubernetes.io/name=vault &>/dev/null; then
+  echo " ✅"
+else
+  echo " ❌"
+fi
 
 # Check Supabase
 printf "🐘 Checking Supabase..."
@@ -42,7 +46,7 @@ kubectl --kubeconfig "$KCFG" get ingressroutes -A --no-headers 2>/dev/null | wc 
 # Check for certificate errors
 echo ""
 echo "🔍 Recent Traefik Issues:"
-CERT_ERRORS=$(kubectl --kubeconfig "$KCFG" logs deployment/traefik -n traefik-system --tail=10 2>/dev/null | grep -c "ACME certificate" || echo "0")
+CERT_ERRORS=$(kubectl --kubeconfig "$KCFG" logs deployment/traefik -n traefik-system --tail=10 2>/dev/null | grep -c "ACME certificate" || true)
 if [ "$CERT_ERRORS" -gt 0 ]; then
   echo "  ⚠️  $CERT_ERRORS ACME certificate errors detected"
   echo "  💡 Consider disabling ACME for local development"

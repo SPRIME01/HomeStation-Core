@@ -1,0 +1,93 @@
+# Custom values for full Supabase deployment with working image tags
+secret:
+  jwt:
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0"
+    serviceKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU"
+    secret: "abcdefghijklmnopqrstuvwxyz123456"
+  db:
+    username: "postgres"
+    password: "postgres"
+    database: "postgres"
+
+# Database configuration
+db:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "15-alpine"
+  environment:
+    POSTGRES_PASSWORD: "postgres"
+    POSTGRES_USER: "postgres"
+    POSTGRES_DB: "postgres"
+
+# Studio configuration
+studio:
+  enabled: true
+  image:
+    repository: supabase/studio
+    tag: "latest"
+
+# Auth configuration
+auth:
+  enabled: true
+  image:
+    repository: supabase/gotrue
+    tag: "v2.158.1"
+
+# Rest API configuration
+rest:
+  enabled: true
+  image:
+    repository: postgrest/postgrest
+    tag: "v12.2.3"
+
+# Realtime configuration
+realtime:
+  enabled: true
+  image:
+    repository: supabase/realtime
+    tag: "v2.30.23"
+
+# Meta configuration
+meta:
+  enabled: true
+  image:
+    repository: supabase/postgres-meta
+    tag: "v0.84.2"
+
+# Storage configuration
+storage:
+  enabled: true
+  image:
+    repository: supabase/storage-api
+    tag: "v1.11.7"
+
+# Image proxy configuration
+imgproxy:
+  enabled: true
+  image:
+    repository: darthsim/imgproxy
+    tag: "v3.25.0"
+
+# Kong API Gateway configuration
+kong:
+  enabled: true
+  image:
+    repository: kong
+    tag: "3.8"
+
+# Analytics configuration
+analytics:
+  enabled: false
+
+# Vector configuration
+vector:
+  enabled: false
+
+# Functions configuration
+functions:
+  enabled: false
+
+# Minio configuration (for storage)
+minio:
+  enabled: false

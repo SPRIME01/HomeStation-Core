@@ -26,26 +26,18 @@ fi
 VAULT_POD=$(kubectl get pod -n vault -l app.kubernetes.io/name=vault -o jsonpath='{.items[0].metadata.name}')
 echo "🔍 Using Vault pod: $VAULT_POD"
 
-# Check if we have a root token
-if [ -f vault-init.json ]; then
-    ROOT_TOKEN=$(jq -r '.root_token' vault-init.json)
-    echo "✅ Found existing root token"
-else
-    echo "❌ No vault-init.json found. Please run 'just vault_init' first."
-    exit 1
-fi
+# In dev mode, the root token is always "root"
+ROOT_TOKEN="root"
+echo "✅ Using default dev mode root token"
 
 # Set vault environment variables
 export VAULT_TOKEN=$ROOT_TOKEN
 
 # Create admin policy
 echo "📋 Creating admin policy..."
-kubectl exec -n vault $VAULT_POD -- vault policy write admin - <<EOF
-# Admin policy - full access
-path "*" {
-  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-}
-EOF
+echo 'path "*" {capabilities = ["create", "read", "update", "delete", "list", "sudo"]}' > /tmp/admin-policy.hcl
+kubectl cp /tmp/admin-policy.hcl vault/$VAULT_POD:/tmp/admin-policy.hcl
+kubectl exec -n vault $VAULT_POD -- vault policy write admin /tmp/admin-policy.hcl
 
 # Enable userpass auth method if not already enabled
 echo "🔑 Enabling userpass authentication..."
@@ -62,15 +54,10 @@ kubectl exec -n vault $VAULT_POD -- vault write auth/userpass/users/$VAULT_ADMIN
 
 # Create a homelab policy for restricted access
 echo "📋 Creating homelab policy..."
-kubectl exec -n vault $VAULT_POD -- vault policy write homelab - <<EOF
-# Homelab policy - limited access to homelab secrets
-path "secret/data/homelab/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-path "secret/metadata/homelab/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-EOF
+echo 'path "secret/data/homelab/*" {capabilities = ["create", "read", "update", "delete", "list"]}
+path "secret/metadata/homelab/*" {capabilities = ["create", "read", "update", "delete", "list"]}' > /tmp/homelab-policy.hcl
+kubectl cp /tmp/homelab-policy.hcl vault/$VAULT_POD:/tmp/homelab-policy.hcl
+kubectl exec -n vault $VAULT_POD -- vault policy write homelab /tmp/homelab-policy.hcl
 
 # Create homelab user
 VAULT_HOMELAB_USERNAME="${VAULT_HOMELAB_USERNAME:-homelab}"
@@ -83,13 +70,21 @@ kubectl exec -n vault $VAULT_POD -- vault write auth/userpass/users/$VAULT_HOMEL
 
 # Store some sample secrets
 echo "🔐 Storing sample secrets..."
-kubectl exec -n vault $VAULT_POD -- vault kv put secret/homelab/database \
-    username="postgres" \
-    password="sample-db-password"
+if ! kubectl exec -n vault $VAULT_POD -- vault kv get secret/homelab/database >/dev/null 2>&1; then
+    kubectl exec -n vault $VAULT_POD -- vault kv put secret/homelab/database \
+        username="postgres" \
+        password="sample-db-password"
+else
+    echo "ℹ️  secret/homelab/database already exists"
+fi
 
-kubectl exec -n vault $VAULT_POD -- vault kv put secret/homelab/api \
-    key="sample-api-key" \
-    secret="sample-api-secret"
+if ! kubectl exec -n vault $VAULT_POD -- vault kv get secret/homelab/api >/dev/null 2>&1; then
+    kubectl exec -n vault $VAULT_POD -- vault kv put secret/homelab/api \
+        key="sample-api-key" \
+        secret="sample-api-secret"
+else
+    echo "ℹ️  secret/homelab/api already exists"
+fi
 
 echo "✅ Vault setup completed successfully!"
 echo ""

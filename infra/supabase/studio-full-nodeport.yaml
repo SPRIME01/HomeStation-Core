@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase-full-studio-nodeport
+  namespace: supabase
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30081
+  selector:
+    app.kubernetes.io/instance: supabase-full
+    app.kubernetes.io/name: supabase-studio

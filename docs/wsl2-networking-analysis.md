@@ -1,5 +1,5 @@
 # Alternative Access Strategy for Rancher Desktop + WSL2
-# 
+#
 # Root Cause: MetalLB LoadBalancer IPs are assigned within k3s cluster running in WSL2,
 # but are not bridged to Windows host network, making them inaccessible from browser.
 #
