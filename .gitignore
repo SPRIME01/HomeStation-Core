@@ -10,9 +10,10 @@ __pycache__/
 
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
-
-# Nx cache and coverage artifacts
+# Nx cache and workspace data
 .nx/
+
+# Coverage artifacts
 coverage/
 .nyc_output/
 **/lcov-report/
