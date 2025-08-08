@@ -14,6 +14,9 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+      # middlewares:
+      #   - name: dashboard-auth
+      #     namespace: traefik-system
 
 ---
 # HTTPS version (when certificates are working)
@@ -31,6 +34,21 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+      # middlewares:
+      #   - name: dashboard-auth
+      #     namespace: traefik-system
   # Enable when certificates are properly configured
   # tls:
   #   certResolver: letsencrypt
+
+---
+# Optional basic auth middleware for dashboard protection
+# kubectl -n traefik-system create secret generic dashboard-auth-secret --from-file=users=./usersfile
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-auth
+  namespace: traefik-system
+spec:
+  basicAuth:
+    secret: dashboard-auth-secret

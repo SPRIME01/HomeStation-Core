@@ -35,13 +35,23 @@ spec:
             enabled: true
         ports:
           web:
-            redirectTo:
-              port: websecure
+            # Keep HTTP available locally (no forced redirect)
+            redirectTo: null
           websecure:
             tls:
               enabled: true
+          # Expose admin port (for port-forwarding)
+          traefik:
+            port: 9000
+            expose: true
+        service:
+          annotations:
+            # Ensure MetalLB can allocate IP when using LoadBalancer
+            metallb.universe.tf/address-pool: homelab-pool
         additionalArguments:
           # Use valid email from .env for Let's Encrypt
+          - "--api.dashboard=true"
+          - "--serversTransport.insecureSkipVerify=true"
           - "--certificatesresolvers.letsencrypt.acme.email=sprime01@gmail.com"
           - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
           - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"

@@ -37,11 +37,26 @@ spec:
     certResolver: letsencrypt
 
 ---
-# Supabase REST API
+# Supabase REST API (HTTP for local dev; HTTPS defined below)
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: supabase-rest-api
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`api.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-rest
+          port: 3000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-rest-api-secure
   namespace: supabase
 spec:
   entryPoints:
@@ -56,11 +71,26 @@ spec:
     certResolver: letsencrypt
 
 ---
-# Supabase Auth (GoTrue)
+# Supabase Auth (GoTrue) HTTP and HTTPS
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: supabase-auth
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`auth.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-auth
+          port: 9999
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-auth-secure
   namespace: supabase
 spec:
   entryPoints:
@@ -75,11 +105,26 @@ spec:
     certResolver: letsencrypt
 
 ---
-# Supabase Realtime
+# Supabase Realtime HTTP and HTTPS
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: supabase-realtime
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`realtime.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-realtime
+          port: 4000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-realtime-secure
   namespace: supabase
 spec:
   entryPoints:
@@ -94,11 +139,26 @@ spec:
     certResolver: letsencrypt
 
 ---
-# Supabase Storage
+# Supabase Storage HTTP and HTTPS
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: supabase-storage
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`storage.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-storage
+          port: 5000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-storage-secure
   namespace: supabase
 spec:
   entryPoints:
@@ -113,11 +173,26 @@ spec:
     certResolver: letsencrypt
 
 ---
-# Supabase Meta API
+# Supabase Meta API HTTP and HTTPS
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: supabase-meta
+  namespace: supabase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`meta.supabase.homestation.local`)
+      kind: Rule
+      services:
+        - name: supabase-supabase-meta
+          port: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: supabase-meta-secure
   namespace: supabase
 spec:
   entryPoints:

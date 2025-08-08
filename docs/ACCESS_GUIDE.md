@@ -13,15 +13,32 @@ kubectl get pods -n supabase
 kubectl -n vault exec vault-0 -- vault status
 ```
 
+### 🧪 Quick Helpers
+
+```bash
+# Traefik status and routes
+just traefik_status
+just pf_traefik   # http://localhost:8082
+
+# Supabase Studio
+just pf_supabase  # http://localhost:30080
+
+# Vault UI
+just pf_vault     # http://localhost:8201
+
+# Network doctor (IngressRoutes, NodePorts, MetalLB)
+just doctor_network
+```
+
 ## 🔋 Supabase Access
 
 ### 🌐 Web Interfaces
 
 1. **Supabase Studio (Dashboard)**
    ```bash
-   kubectl port-forward -n supabase svc/supabase-supabase-studio 3000:3000
+   just pf_supabase
    ```
-   - URL: http://localhost:3000
+   - URL: http://localhost:30080
    - Username: admin
    - Password: homelab-admin-password
 
@@ -36,13 +53,14 @@ kubectl -n vault exec vault-0 -- vault status
 
 3. **Direct API Access (via Traefik)**
    ```bash
-   # Access REST API directly via Traefik
-   curl -k https://192.168.0.50:32184/rest/v1/
+   # HTTP (local dev) and HTTPS (with ACME staging)
+   curl -s http://api.supabase.homestation.local/rest/v1/ | jq .
+   curl -ks https://api.supabase.homestation.local/rest/v1/ | jq .
    ```
-   - REST API: https://api.supabase.homestation.local:32184/
-   - Auth API: https://auth.supabase.homestation.local:32184/
-   - Storage API: https://storage.supabase.homestation.local:32184/
-   - Realtime: wss://realtime.supabase.homestation.local:32184/
+   - REST API: http(s)://api.supabase.homestation.local/rest/v1/
+   - Auth API: http(s)://auth.supabase.homestation.local/auth/v1/
+   - Storage API: http(s)://storage.supabase.homestation.local/storage/v1/
+   - Realtime: ws(s)://realtime.supabase.homestation.local/realtime/v1/
 
 ### 🔑 API Keys
 
