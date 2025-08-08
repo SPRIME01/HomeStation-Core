@@ -1,7 +1,0 @@
-> nx run nx-homelab-plugin:lint
-
-
-Linting "nx-homelab-plugin"...
-
-✔ All files pass linting
-
