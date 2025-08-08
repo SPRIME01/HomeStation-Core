@@ -6,7 +6,8 @@ interface VaultSecretGeneratorSchema {
 }
 
 export default async function (tree: Tree, options: VaultSecretGeneratorSchema) {
-  const dir = `infra/vault-policies/${options.path.replace('/', '_')}`;
+  const safeName = options.path.replace(/[/\-]/g, '_');
+  const dir = `infra/vault-policies/${safeName}`;
 
   // Create Vault policy file
   const policyContent = `# Policy for ${options.path}
@@ -24,7 +25,7 @@ path "${options.path}/*" {
   // Create a simple setup script
   const setupScript = `#!/bin/bash
 # Setup script for ${options.path}
-vault policy write ${options.path.replace('/', '_')} policy.hcl
+vault policy write ${safeName} policy.hcl
 echo "Policy created for path: ${options.path}"
 `;
 

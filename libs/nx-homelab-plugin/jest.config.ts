@@ -8,4 +8,9 @@ export default {
     },
     moduleFileExtensions: ['ts', 'js', 'html'],
     coverageDirectory: '../../coverage/libs/nx-homelab-plugin',
+    collectCoverageFrom: [
+        '<rootDir>/generators/**/*.ts',
+        '!<rootDir>/**/schema.ts',
+    ],
+    coverageReporters: ['text', 'lcov'],
 };

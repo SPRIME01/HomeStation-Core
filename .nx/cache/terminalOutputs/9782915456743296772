@@ -1,8 +1,0 @@
-> ansible-lint playbooks/ || echo 'Install ansible-lint: pip install ansible-lint'
-
-sh: 1: ansible-lint: not found
-Install ansible-lint: pip install ansible-lint
-> pulumi preview --diff || echo 'Pulumi not configured'
-
-[38;5;1merror: [0m[0mno Pulumi.yaml project file found (searching upwards from /home/prime/homelab/infrastructure). If you have not created a project yet, use `pulumi new` to do so: no project file found[0m
-Pulumi not configured
