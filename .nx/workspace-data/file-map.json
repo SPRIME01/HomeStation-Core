@@ -19,892 +19,892 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "tests/justfile/test-init.sh",
-        "hash": "8057677086583301552"
-      },
-      {
-        "file": "supabase-kubernetes/README.md",
-        "hash": "6466652952967084970"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/vector/deployment.yaml",
-        "hash": "12384243255328182627"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/analytics/service.yaml",
-        "hash": "13762583454290392034"
-      },
-      {
-        "file": "scripts/install-splinter.sh",
-        "hash": "4754368098078870085"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/storage/volume.yaml",
-        "hash": "6693515757284540839"
-      },
-      {
-        "file": "tests/justfile/test-generate-service.sh",
-        "hash": "10651121450482798261"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/README.md",
-        "hash": "3879068292207752367"
-      },
-      {
-        "file": "tests/justfile/test-validate.sh",
-        "hash": "4149731674713468661"
-      },
-      {
-        "file": "tests/justfile/test-generate-vault-secret.sh",
-        "hash": "12951390557443670846"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "13496586988542919823"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/serviceaccount.yaml",
-        "hash": "16681893819781538427"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/rest/service.yaml",
-        "hash": "16848696051079360905"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/vector/service.yaml",
-        "hash": "9685942837205850861"
-      },
-      {
-        "file": "tests/justfile/test-lint.sh",
-        "hash": "8244411531797896916"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/_helpers.tpl",
-        "hash": "3274967277842382668"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/service/generator.ts.html",
-        "hash": "18092985886853017849"
-      },
-      {
-        "file": "scripts/setup-vault-jwt.sh",
-        "hash": "4650825049774841643"
-      },
-      {
-        "file": "Show",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/secrets/jwt.yaml",
-        "hash": "13290987171006764319"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/sort-arrow-sprite.png",
-        "hash": "254831142482329146"
-      },
-      {
-        "file": "package.json",
-        "hash": "17297045043511215649"
-      },
-      {
-        "file": "infra/supabase/studio-working.yaml",
-        "hash": "11993064609850698330"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/minio/deployment.yaml",
-        "hash": "13152926451348028242"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/base.css",
-        "hash": "6204767174569381253"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/analytics/_helpers.tpl",
-        "hash": "16548474440954500616"
-      },
-      {
-        "file": "scripts/vault-setup.sh",
-        "hash": "3744051148824351193"
-      },
-      {
-        "file": "tests/justfile/test-doctor.sh",
-        "hash": "10746613326644121873"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/realtime/_helpers.tpl",
-        "hash": "11143553018252838296"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/secrets/db.yaml",
-        "hash": "12126591881650620629"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/volume.yaml",
-        "hash": "8458592818733866663"
-      },
-      {
-        "file": "infra/argocd/apps/README.md",
-        "hash": "14473872137462121908"
-      },
-      {
-        "file": "docs/remediation-plan.md",
-        "hash": "3471176912051070821"
-      },
-      {
-        "file": "Change",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/studio/_helpers.tpl",
-        "hash": "12605138767117102064"
-      },
-      {
-        "file": "infra/argocd/supabase-simple.yaml",
-        "hash": "3186732189402518476"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/minio/_helpers.tpl",
-        "hash": "13153280966421632307"
-      },
-      {
-        "file": "docs/todo.md",
-        "hash": "1296652066684891221"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/meta/service.yaml",
-        "hash": "1775752616342277546"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/studio/serviceaccount.yaml",
-        "hash": "4829878182382436792"
-      },
-      {
-        "file": "supabase-default-values.yaml",
-        "hash": "16987119231810727183"
-      },
-      {
-        "file": "justfile",
-        "hash": "7742553654821158179"
-      },
-      {
-        "file": "infra/supabase/values.yaml",
-        "hash": "16843390523723578146"
-      },
-      {
-        "file": "infra/argocd/bootstrap.yaml",
-        "hash": "7468612169259456729"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/vector/config.yaml",
-        "hash": "13110257653614991636"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/meta/serviceaccount.yaml",
-        "hash": "2718066658109142732"
-      },
-      {
-        "file": "supabase-kubernetes/index.yaml",
-        "hash": "10978389524498078668"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "15285719405862018188"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/studio/deployment.yaml",
-        "hash": "8618138176824530644"
-      },
-      {
-        "file": "scripts/doctor.sh",
-        "hash": "958809628644269414"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/NOTES.txt",
-        "hash": "10339221198706666462"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/index.html",
-        "hash": "13890889009024861111"
-      },
-      {
-        "file": ".github/instructions/prompts/spec_pack.orchestrator.md",
-        "hash": "18157965598915564043"
-      },
-      {
-        "file": "infra/supabase/studio-simple.yaml",
-        "hash": "16983590214036869212"
-      },
-      {
-        "file": "Settings",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "docs/Rancher_K3s.md",
-        "hash": "157421206855515966"
-      },
-      {
-        "file": ".env.example",
-        "hash": "17472014680832437757"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/ci/example-values.yaml",
-        "hash": "13696276637478582689"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/argo-app/generator.ts.html",
-        "hash": "16591476579683327197"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/auth.yaml",
-        "hash": "11238539385575708107"
-      },
-      {
-        "file": "supabase-kubernetes/build/supabase-0.0.2.tgz",
-        "hash": "6484489416360568210"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/storage/service.yaml",
-        "hash": "11645846037774581235"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/ingress.yaml",
-        "hash": "11579594896243937660"
-      },
-      {
-        "file": ".github/instructions/security.md",
-        "hash": "1632296361030456667"
-      },
-      {
-        "file": ".github/instructions/tech.md",
-        "hash": "17991740029095114530"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/deployment.yaml",
-        "hash": "5618968278541489218"
-      },
-      {
-        "file": "supabase-full-values.yaml",
-        "hash": "9279277052659859916"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/imgproxy.yaml",
-        "hash": "10364325265258253805"
-      },
-      {
-        "file": "jest.config.js",
-        "hash": "9014065930750983230"
-      },
-      {
-        "file": "tests/justfile/test-deploy.sh",
-        "hash": "1874548503076203934"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/serviceaccount.yaml",
-        "hash": "2950396814334716190"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/minio.yaml",
-        "hash": "11934871597376293305"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/docker/Database.Dockerfile",
-        "hash": "9665528561232533505"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/realtime/serviceaccount.yaml",
-        "hash": "1221158142931001858"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/secrets/dashboard.yaml",
-        "hash": "16706686269303284468"
-      },
-      {
-        "file": "tests/justfile/test-provision-core.sh",
-        "hash": "870558159327016699"
-      },
-      {
-        "file": "scripts/argo-sync.sh",
-        "hash": "8909789191762768390"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/volume.yaml",
-        "hash": "12823210948019276555"
-      },
-      {
-        "file": ".github/instructions/prompts/orchestrator.prompt.md",
-        "hash": "10085955471059226587"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/rest.yaml",
-        "hash": "16778735649072945269"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/studio.yaml",
-        "hash": "16045045196773840009"
-      },
-      {
-        "file": ".github/instructions/product.md",
-        "hash": "7606903339486000469"
-      },
-      {
-        "file": "scripts/setup-supabase-secrets.sh",
-        "hash": "11780703713211053732"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/auth/serviceaccount.yaml",
-        "hash": "12194890415168098673"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/analytics/deployment.yaml",
-        "hash": "16607490837059041058"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/.DS_Store",
-        "hash": "15055992987893062681"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/storage/_helpers.tpl",
-        "hash": "4490507342925283273"
-      },
-      {
-        "file": ".env.backup",
-        "hash": "7749531494111707751"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov.info",
-        "hash": "18147658079233329227"
-      },
-      {
-        "file": "supabase-kubernetes/build/supabase-0.0.1.tgz",
-        "hash": "9873946188342033132"
-      },
-      {
-        "file": "templates/product.md",
-        "hash": "3948857910836101564"
-      },
-      {
-        "file": "docs/Kubernetes/seven_must_know.md",
-        "hash": "13197283818992833872"
-      },
-      {
-        "file": "workflows/spec-lint.yml",
-        "hash": "5681345042683432442"
-      },
-      {
-        "file": "docs/pulumi_interface.md",
-        "hash": "12549345632965715283"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/values.yaml",
-        "hash": "14480137973024864828"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/db.yaml",
-        "hash": "3627190182459073825"
-      },
-      {
-        "file": "supabase-kubernetes/build.sh",
-        "hash": "12585003931754361525"
-      },
-      {
-        "file": "docs/spec.md",
-        "hash": "12646666496452476834"
-      },
-      {
-        "file": "docs/SUPABASE_AUDIT_REPORT.md",
-        "hash": "6210988688718346881"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/minio/service.yaml",
-        "hash": "10444166650701032560"
-      },
-      {
-        "file": "docs/SECRETS_MANAGEMENT.md",
-        "hash": "15714690788267748752"
-      },
-      {
-        "file": "tests/justfile/test-generate-argo-app.sh",
-        "hash": "16036335081057061735"
-      },
-      {
-        "file": ".vscode/copilot-instructions.md",
-        "hash": "17437951876209873930"
-      },
-      {
-        "file": "scripts/setup-vault.sh",
-        "hash": "13356886510979418720"
-      },
-      {
-        "file": "docs/traefik-fixes.md",
-        "hash": "1203648668327751253"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/vault-secret/generator.ts.html",
-        "hash": "12037163541074564265"
-      },
-      {
-        "file": "LAN",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/realtime.yaml",
-        "hash": "12152162027701128089"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "12017858859443835260"
-      },
-      {
         "file": "supabase-kubernetes/charts/supabase/templates/functions/serviceaccount.yaml",
         "hash": "5861669260854670309"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/functions/service.yaml",
-        "hash": "847584702356122741"
-      },
-      {
-        "file": "docs/Kubernetes/rancher_interface.md",
-        "hash": "4883542644780812007"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/secrets/smtp.yaml",
-        "hash": "9087665564442570393"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/studio/service.yaml",
-        "hash": "8900247935128248043"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/analytics/serviceaccount.yaml",
-        "hash": "7750732761802695362"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/storage/deployment.yaml",
-        "hash": "13087801463191436516"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/block-navigation.js",
-        "hash": "1801078621803424330"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/auth/service.yaml",
-        "hash": "10990448741366969475"
-      },
-      {
-        "file": "templates/structure.md",
-        "hash": "13379133436182085708"
-      },
-      {
-        "file": "supabase-kubernetes/charts/.helmignore",
-        "hash": "9835375496508434033"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/deployment.yaml",
-        "hash": "10581719670518834093"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/meta.yaml",
-        "hash": "17055799616090104826"
-      },
-      {
-        "file": "docs/testing-strategy.md",
-        "hash": "12133498701227552781"
-      },
-      {
-        "file": "docs/architecture-overview.md",
-        "hash": "3408371728773758218"
-      },
-      {
-        "file": "infra/production-ingress.yaml",
-        "hash": "7920354673711161159"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/initdb.config.yaml",
-        "hash": "10707652493498828291"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/secrets/analytics.yaml",
-        "hash": "8778860366682082081"
-      },
-      {
-        "file": ".github/instructions/prompts/product.prompt.md",
-        "hash": "6429105052883935074"
-      },
-      {
-        "file": "supabase-values.yaml",
-        "hash": "4674225571724092310"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/analytics/gcloud.secret.yaml",
-        "hash": "10406094082434590149"
       },
       {
         "file": "splinter.sql",
         "hash": "16695617975900742589"
       },
       {
-        "file": ".vscode/settings.json",
-        "hash": "600490069392053818"
+        "file": "supabase-kubernetes/charts/supabase/templates/auth/_helpers.tpl",
+        "hash": "18294032367072028017"
       },
       {
-        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/service.yaml",
-        "hash": "17042453450208293899"
-      },
-      {
-        "file": "infra/traefik/rancher-dashboard-ingress.yaml",
-        "hash": "7974256349129704653"
-      },
-      {
-        "file": "infra/supabase/studio-full-nodeport.yaml",
-        "hash": "1885190275446888244"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/service.yaml",
-        "hash": "11768841680870796094"
-      },
-      {
-        "file": "tests/justfile/test-pre-merge.sh",
-        "hash": "2349199931701024229"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/_helpers.tpl",
-        "hash": "7328329783319314824"
-      },
-      {
-        "file": ".github/instructions/prompts/structure.prompt.md",
-        "hash": "4927678629340636655"
-      },
-      {
-        "file": ".github/instructions/prompts/tasks.prompt.md",
-        "hash": "9801011966878912011"
-      },
-      {
-        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/src/main.py:Zone.Identifier",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/argo-app/index.html",
-        "hash": "17485117257771129131"
-      },
-      {
-        "file": "infra/traefik/dashboard-ingress.yaml",
-        "hash": "2937141295076623377"
-      },
-      {
-        "file": ".github/instructions/prompts/requirements.prompt.md",
-        "hash": "11917153952887869058"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/functions/_helpers.tpl",
-        "hash": "10386432421385370870"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/serviceaccount.yaml",
-        "hash": "17548881915154017407"
-      },
-      {
-        "file": "nx.json",
-        "hash": "2456094307308070334"
-      },
-      {
-        "file": "docs/DevReadMe.md",
-        "hash": "11568101726933559271"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/realtime/service.yaml",
-        "hash": "4351688530383892073"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/prettify.js",
-        "hash": "15884788582061322779"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/rest/serviceaccount.yaml",
-        "hash": "1797238568120896126"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/minio/serviceaccount.yaml",
-        "hash": "14356831922003102855"
-      },
-      {
-        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile:Zone.Identifier",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/values.example.yaml",
-        "hash": "13696276637478582689"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/kong/config.yaml",
-        "hash": "17617415536009281647"
-      },
-      {
-        "file": "infra/argocd/metallb.yaml",
-        "hash": "8871474237627838691"
+        "file": "tests/justfile/test-deploy.sh",
+        "hash": "1874548503076203934"
       },
       {
         "file": "supabase-kubernetes/charts/supabase/templates/secrets/_helpers.tpl",
         "hash": "14397390320791225808"
       },
       {
-        "file": "scripts/generate-supabase-jwt.sh",
-        "hash": "18109678073975156530"
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/ingress.yaml",
+        "hash": "11579594896243937660"
       },
       {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/vault-secret/index.html",
-        "hash": "6329459185788142477"
+        "file": ".github/instructions/tech.md",
+        "hash": "17991740029095114530"
       },
       {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/secretrefs.yaml",
-        "hash": "18358556529486575070"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/functions/functions.config.yaml",
-        "hash": "11404753642981693527"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/kong.yaml",
-        "hash": "18225727856776326684"
-      },
-      {
-        "file": "supabase-kubernetes/LICENSE",
-        "hash": "12649885980860800067"
-      },
-      {
-        "file": ".github/instructions/data.md",
-        "hash": "10337019996044203506"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/sorter.js",
-        "hash": "17053119163225536857"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/service/index.html",
-        "hash": "10212247570603646278"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/auth/deployment.yaml",
-        "hash": "8555747592510778064"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/Chart.yaml",
-        "hash": "10225811875300030394"
-      },
-      {
-        "file": "templates/tech.md",
-        "hash": "14366347001970021581"
-      },
-      {
-        "file": "tests/justfile/run-all-tests.sh",
-        "hash": "13547138467449750135"
-      },
-      {
-        "file": "tests/justfile/test-vault-init.sh",
-        "hash": "18440305799314851838"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/prettify.css",
-        "hash": "8163588510556258587"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/functions/deployment.yaml",
-        "hash": "15490291230577183646"
-      },
-      {
-        "file": "scripts/spec_lint.py",
-        "hash": "6306465704236622553"
-      },
-      {
-        "file": "tests/justfile/test-test.sh",
-        "hash": "7723086436483261367"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/service.yaml",
-        "hash": "13893303290333573335"
-      },
-      {
-        "file": "docs/wsl2-networking-analysis.md",
-        "hash": "10426610514725810503"
-      },
-      {
-        "file": "scripts/spec_manifest_to_md.py",
-        "hash": "15051294189269007705"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/deployment.yaml",
-        "hash": "3299395239466371417"
-      },
-      {
-        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile",
-        "hash": "17240827428475442228"
-      },
-      {
-        "file": "scripts/run-splinter-lints.sh",
-        "hash": "11652403333667077962"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/migration.config.yaml",
-        "hash": "13680006035237316788"
-      },
-      {
-        "file": "coverage/libs/nx-homelab-plugin/lcov-report/favicon.png",
-        "hash": "13402560043085226048"
-      },
-      {
-        "file": "infra/supabase/pre-install-job.yaml",
-        "hash": "4273111226773610698"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/db/_helpers.tpl",
-        "hash": "14786544217663563238"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/rest/_helpers.tpl",
-        "hash": "11904118251282748444"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/vector/serviceaccount.yaml",
-        "hash": "863966896772746933"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/vector/_helpers.tpl",
-        "hash": "2723664987038246621"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/realtime/deployment.yaml",
-        "hash": "13345534005980146322"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/_helpers.tpl",
-        "hash": "18244228746565880971"
-      },
-      {
-        "file": "docs/DELIVERABLES.md",
-        "hash": "6690664793621082581"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/storage.yaml",
-        "hash": "17202095060650341012"
-      },
-      {
-        "file": "infra/supabase/traefik-ingress.yaml",
-        "hash": "11131046331918478443"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/rest/deployment.yaml",
-        "hash": "5546797946173203766"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/auth/_helpers.tpl",
-        "hash": "18294032367072028017"
-      },
-      {
-        "file": "justfile.backup",
-        "hash": "7343553212407452366"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/meta/deployment.yaml",
-        "hash": "10570961332414174367"
-      },
-      {
-        "file": ".github/instructions/structure.md",
-        "hash": "431435121163464622"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "9430166341120122740"
-      },
-      {
-        "file": "scripts/setup-vault-jwt-simple.sh",
-        "hash": "15148704647144714554"
-      },
-      {
-        "file": "pnpm-workspace.yaml",
-        "hash": "8024946245001145684"
-      },
-      {
-        "file": "supabase-kubernetes/.github/workflows/lint-test.yaml",
-        "hash": "2598814050124121076"
-      },
-      {
-        "file": "scripts/generate-supabase-jwt.js",
-        "hash": "754897323891024224"
-      },
-      {
-        "file": "infra/metallb/ip-pool.yaml",
-        "hash": "14956615325208817170"
-      },
-      {
-        "file": ".github/instructions/engineering.md",
-        "hash": "4812569844694144455"
-      },
-      {
-        "file": "supabase-kubernetes/charts/supabase/templates/minio/volume.yaml",
-        "hash": "6152598664453276874"
+        "file": "supabase-kubernetes/charts/supabase/templates/realtime/serviceaccount.yaml",
+        "hash": "1221158142931001858"
       },
       {
         "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/src/main.py",
         "hash": "18081581007776838771"
       },
       {
-        "file": "docs/analysis-report.md",
-        "hash": "11120782369520637210"
+        "file": "nx.json",
+        "hash": "2456094307308070334"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/service.yaml",
+        "hash": "13893303290333573335"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/vector/_helpers.tpl",
+        "hash": "2723664987038246621"
+      },
+      {
+        "file": ".vscode/copilot-instructions.md",
+        "hash": "17437951876209873930"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "12017858859443835260"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/_helpers.tpl",
+        "hash": "3274967277842382668"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/index.html",
+        "hash": "13890889009024861111"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/service/generator.ts.html",
+        "hash": "18092985886853017849"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/service.yaml",
+        "hash": "17042453450208293899"
+      },
+      {
+        "file": ".github/instructions/prompts/tasks.prompt.md",
+        "hash": "9801011966878912011"
+      },
+      {
+        "file": "infra/supabase/values.yaml",
+        "hash": "16843390523723578146"
+      },
+      {
+        "file": "infra/metallb/ip-pool.yaml",
+        "hash": "14956615325208817170"
+      },
+      {
+        "file": "infra/supabase/pre-install-job.yaml",
+        "hash": "4273111226773610698"
+      },
+      {
+        "file": ".github/instructions/prompts/structure.prompt.md",
+        "hash": "4927678629340636655"
+      },
+      {
+        "file": "scripts/setup-vault-jwt.sh",
+        "hash": "4650825049774841643"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/initdb.config.yaml",
+        "hash": "10707652493498828291"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/kong.yaml",
+        "hash": "18225727856776326684"
+      },
+      {
+        "file": "infra/argocd/apps/README.md",
+        "hash": "14473872137462121908"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/analytics/service.yaml",
+        "hash": "13762583454290392034"
+      },
+      {
+        "file": "scripts/setup-vault.sh",
+        "hash": "13356886510979418720"
+      },
+      {
+        "file": "docs/todo.md",
+        "hash": "1296652066684891221"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/base.css",
+        "hash": "6204767174569381253"
+      },
+      {
+        "file": ".github/instructions/prompts/product.prompt.md",
+        "hash": "6429105052883935074"
+      },
+      {
+        "file": "scripts/install-splinter.sh",
+        "hash": "4754368098078870085"
+      },
+      {
+        "file": ".env.backup",
+        "hash": "7749531494111707751"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/secrets/dashboard.yaml",
+        "hash": "16706686269303284468"
+      },
+      {
+        "file": ".github/instructions/structure.md",
+        "hash": "431435121163464622"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/minio/deployment.yaml",
+        "hash": "13152926451348028242"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/analytics/gcloud.secret.yaml",
+        "hash": "10406094082434590149"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/sorter.js",
+        "hash": "17053119163225536857"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/realtime.yaml",
+        "hash": "12152162027701128089"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/deployment.yaml",
+        "hash": "10581719670518834093"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/functions/deployment.yaml",
+        "hash": "15490291230577183646"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/ci/example-values.yaml",
+        "hash": "13696276637478582689"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/vault-secret/index.html",
+        "hash": "6329459185788142477"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/values.example.yaml",
+        "hash": "13696276637478582689"
+      },
+      {
+        "file": "docs/spec.md",
+        "hash": "12646666496452476834"
       },
       {
         "file": "supabase-working-values.yaml",
         "hash": "14613548524138993409"
       },
       {
-        "file": ".github/instructions/prompts/design.prompt.md",
-        "hash": "14383135828653696411"
+        "file": "supabase-kubernetes/charts/supabase/templates/auth/serviceaccount.yaml",
+        "hash": "12194890415168098673"
       },
       {
-        "file": "tests/justfile/test-framework.sh",
-        "hash": "13351128970707982681"
+        "file": "supabase-kubernetes/charts/supabase/templates/minio/serviceaccount.yaml",
+        "hash": "14356831922003102855"
       },
       {
-        "file": ".github/instructions/prompts/tech.prompt.md",
-        "hash": "12977261139821287040"
+        "file": "supabase-kubernetes/build.sh",
+        "hash": "12585003931754361525"
       },
       {
-        "file": ".github/copilot-instructions.md",
-        "hash": "6583256432137564353"
+        "file": "tests/justfile/test-generate-service.sh",
+        "hash": "10651121450482798261"
       },
       {
-        "file": "README.md",
-        "hash": "11147521404435976950"
+        "file": "scripts/doctor.sh",
+        "hash": "958809628644269414"
       },
       {
-        "file": ".vscode/mcp.json",
-        "hash": "13804513955984507092"
+        "file": "supabase-kubernetes/charts/supabase/templates/secrets/db.yaml",
+        "hash": "12126591881650620629"
       },
       {
-        "file": "supabase-kubernetes/charts/supabase/templates/test/analytics.yaml",
-        "hash": "4236326550418184499"
+        "file": "supabase-kubernetes/charts/supabase/templates/storage/deployment.yaml",
+        "hash": "13087801463191436516"
       },
       {
-        "file": "supabase-kubernetes/charts/supabase/templates/storage/serviceaccount.yaml",
-        "hash": "12609487961148857110"
+        "file": "tests/justfile/test-generate-argo-app.sh",
+        "hash": "16036335081057061735"
       },
       {
-        "file": "infra/supabase/minimal-deployment.yaml",
-        "hash": "14110718054991302287"
+        "file": "tests/justfile/test-lint.sh",
+        "hash": "8244411531797896916"
       },
       {
         "file": "supabase-kubernetes/charts/supabase/templates/secrets/s3.yaml",
         "hash": "14174960769527822503"
       },
       {
-        "file": "docs/ACCESS_GUIDE.md",
-        "hash": "11616556795933827643"
+        "file": "tests/justfile/test-provision-core.sh",
+        "hash": "870558159327016699"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/studio/deployment.yaml",
+        "hash": "8618138176824530644"
+      },
+      {
+        "file": "infra/production-ingress.yaml",
+        "hash": "7920354673711161159"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "600490069392053818"
+      },
+      {
+        "file": "scripts/argo-sync.sh",
+        "hash": "8909789191762768390"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/deployment.yaml",
+        "hash": "5618968278541489218"
+      },
+      {
+        "file": "jest.config.js",
+        "hash": "9014065930750983230"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/auth/deployment.yaml",
+        "hash": "8555747592510778064"
+      },
+      {
+        "file": "tests/justfile/run-all-tests.sh",
+        "hash": "13547138467449750135"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "8024946245001145684"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/config.yaml",
+        "hash": "17617415536009281647"
+      },
+      {
+        "file": "vault-init.json",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "supabase-kubernetes/README.md",
+        "hash": "6466652952967084970"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/block-navigation.js",
+        "hash": "1801078621803424330"
+      },
+      {
+        "file": "Change",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/NOTES.txt",
+        "hash": "10339221198706666462"
+      },
+      {
+        "file": ".github/copilot-instructions.md",
+        "hash": "6583256432137564353"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/meta/deployment.yaml",
+        "hash": "10570961332414174367"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/studio/_helpers.tpl",
+        "hash": "12605138767117102064"
+      },
+      {
+        "file": "tests/justfile/test-test.sh",
+        "hash": "7723086436483261367"
+      },
+      {
+        "file": "docs/Kubernetes/rancher_interface.md",
+        "hash": "4883542644780812007"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/argo-app/generator.ts.html",
+        "hash": "16591476579683327197"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/rest/deployment.yaml",
+        "hash": "5546797946173203766"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/rest/service.yaml",
+        "hash": "16848696051079360905"
+      },
+      {
+        "file": "README.md",
+        "hash": "11147521404435976950"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/migration.config.yaml",
+        "hash": "13680006035237316788"
+      },
+      {
+        "file": "docs/pulumi_interface.md",
+        "hash": "12549345632965715283"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/functions/service.yaml",
+        "hash": "847584702356122741"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/storage/serviceaccount.yaml",
+        "hash": "12609487961148857110"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/_helpers.tpl",
+        "hash": "18244228746565880971"
+      },
+      {
+        "file": "tests/justfile/test-init.sh",
+        "hash": "8057677086583301552"
+      },
+      {
+        "file": "infra/supabase/studio-simple.yaml",
+        "hash": "16983590214036869212"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/rest/serviceaccount.yaml",
+        "hash": "1797238568120896126"
+      },
+      {
+        "file": "supabase-kubernetes/.github/workflows/lint-test.yaml",
+        "hash": "2598814050124121076"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/_helpers.tpl",
+        "hash": "7328329783319314824"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/analytics/serviceaccount.yaml",
+        "hash": "7750732761802695362"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/auth.yaml",
+        "hash": "11238539385575708107"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/meta.yaml",
+        "hash": "17055799616090104826"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/_helpers.tpl",
+        "hash": "14786544217663563238"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/volume.yaml",
+        "hash": "8458592818733866663"
+      },
+      {
+        "file": "workflows/spec-lint.yml",
+        "hash": "5681345042683432442"
+      },
+      {
+        "file": "scripts/setup-vault-jwt-simple.sh",
+        "hash": "15148704647144714554"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/db.yaml",
+        "hash": "3627190182459073825"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/service.yaml",
+        "hash": "11768841680870796094"
+      },
+      {
+        "file": "justfile",
+        "hash": "7742553654821158179"
+      },
+      {
+        "file": "scripts/spec_manifest_to_md.py",
+        "hash": "15051294189269007705"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/rest/_helpers.tpl",
+        "hash": "11904118251282748444"
+      },
+      {
+        "file": "docs/SECRETS_MANAGEMENT.md",
+        "hash": "15714690788267748752"
+      },
+      {
+        "file": "docs/SUPABASE_AUDIT_REPORT.md",
+        "hash": "6210988688718346881"
+      },
+      {
+        "file": "templates/product.md",
+        "hash": "3948857910836101564"
+      },
+      {
+        "file": ".github/instructions/prompts/spec_pack.orchestrator.md",
+        "hash": "18157965598915564043"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/Chart.yaml",
+        "hash": "10225811875300030394"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/imgproxy.yaml",
+        "hash": "10364325265258253805"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/volume.yaml",
+        "hash": "12823210948019276555"
+      },
+      {
+        "file": "Settings",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "docs/architecture-overview.md",
+        "hash": "3408371728773758218"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/prettify.js",
+        "hash": "15884788582061322779"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/realtime/service.yaml",
+        "hash": "4351688530383892073"
+      },
+      {
+        "file": "justfile.backup",
+        "hash": "7343553212407452366"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/prettify.css",
+        "hash": "8163588510556258587"
+      },
+      {
+        "file": "scripts/generate-supabase-jwt.sh",
+        "hash": "18109678073975156530"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/src/main.py:Zone.Identifier",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "infra/supabase/minimal-deployment.yaml",
+        "hash": "14110718054991302287"
+      },
+      {
+        "file": "infra/traefik/dashboard-ingress.yaml",
+        "hash": "2937141295076623377"
+      },
+      {
+        "file": "supabase-kubernetes/index.yaml",
+        "hash": "10978389524498078668"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov.info",
+        "hash": "18147658079233329227"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/serviceaccount.yaml",
+        "hash": "16681893819781538427"
+      },
+      {
+        "file": "tests/justfile/test-vault-init.sh",
+        "hash": "18440305799314851838"
+      },
+      {
+        "file": "docs/DELIVERABLES.md",
+        "hash": "6690664793621082581"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13496586988542919823"
+      },
+      {
+        "file": "infra/supabase/traefik-ingress.yaml",
+        "hash": "11131046331918478443"
+      },
+      {
+        "file": ".github/instructions/prompts/tech.prompt.md",
+        "hash": "12977261139821287040"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/vector/deployment.yaml",
+        "hash": "12384243255328182627"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/favicon.png",
+        "hash": "13402560043085226048"
+      },
+      {
+        "file": "scripts/vault-setup.sh",
+        "hash": "3744051148824351193"
+      },
+      {
+        "file": "supabase-kubernetes/build/supabase-0.0.2.tgz",
+        "hash": "6484489416360568210"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/db/deployment.yaml",
+        "hash": "3299395239466371417"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/vector/config.yaml",
+        "hash": "13110257653614991636"
+      },
+      {
+        "file": "docs/DevReadMe.md",
+        "hash": "11568101726933559271"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/functions/functions.config.yaml",
+        "hash": "11404753642981693527"
+      },
+      {
+        "file": "infra/argocd/bootstrap.yaml",
+        "hash": "7468612169259456729"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/docker/Database.Dockerfile",
+        "hash": "9665528561232533505"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "15285719405862018188"
+      },
+      {
+        "file": "scripts/run-splinter-lints.sh",
+        "hash": "11652403333667077962"
+      },
+      {
+        "file": ".github/instructions/prompts/requirements.prompt.md",
+        "hash": "11917153952887869058"
+      },
+      {
+        "file": "infra/supabase/studio-working.yaml",
+        "hash": "11993064609850698330"
+      },
+      {
+        "file": ".github/instructions/product.md",
+        "hash": "7606903339486000469"
+      },
+      {
+        "file": "supabase-values.yaml",
+        "hash": "4674225571724092310"
+      },
+      {
+        "file": "docs/remediation-plan.md",
+        "hash": "3471176912051070821"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/vector/service.yaml",
+        "hash": "9685942837205850861"
+      },
+      {
+        "file": "docs/analysis-report.md",
+        "hash": "11120782369520637210"
+      },
+      {
+        "file": "scripts/generate-supabase-jwt.js",
+        "hash": "754897323891024224"
+      },
+      {
+        "file": "infra/supabase/studio-full-nodeport.yaml",
+        "hash": "1885190275446888244"
+      },
+      {
+        "file": "supabase-full-values.yaml",
+        "hash": "9279277052659859916"
       },
       {
         "file": "supabase-kubernetes/charts/supabase/templates/meta/_helpers.tpl",
         "hash": "4622236053401183417"
       },
       {
-        "file": "vault-init.json",
+        "file": "tests/justfile/test-generate-vault-secret.sh",
+        "hash": "12951390557443670846"
+      },
+      {
+        "file": "docs/Rancher_K3s.md",
+        "hash": "157421206855515966"
+      },
+      {
+        "file": "infra/argocd/metallb.yaml",
+        "hash": "8871474237627838691"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/studio/service.yaml",
+        "hash": "8900247935128248043"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/sort-arrow-sprite.png",
+        "hash": "254831142482329146"
+      },
+      {
+        "file": "supabase-default-values.yaml",
+        "hash": "16987119231810727183"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/secretrefs.yaml",
+        "hash": "18358556529486575070"
+      },
+      {
+        "file": "scripts/setup-supabase-secrets.sh",
+        "hash": "11780703713211053732"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/rest.yaml",
+        "hash": "16778735649072945269"
+      },
+      {
+        "file": "tests/justfile/test-framework.sh",
+        "hash": "13351128970707982681"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/README.md",
+        "hash": "3879068292207752367"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/vault-secret/generator.ts.html",
+        "hash": "12037163541074564265"
+      },
+      {
+        "file": "supabase-kubernetes/LICENSE",
+        "hash": "12649885980860800067"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/analytics.yaml",
+        "hash": "4236326550418184499"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/meta/serviceaccount.yaml",
+        "hash": "2718066658109142732"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/argo-app/index.html",
+        "hash": "17485117257771129131"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/studio/serviceaccount.yaml",
+        "hash": "4829878182382436792"
+      },
+      {
+        "file": "infra/traefik/rancher-dashboard-ingress.yaml",
+        "hash": "7974256349129704653"
+      },
+      {
+        "file": "infra/argocd/supabase-simple.yaml",
+        "hash": "3186732189402518476"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/minio/volume.yaml",
+        "hash": "6152598664453276874"
+      },
+      {
+        "file": "docs/wsl2-networking-analysis.md",
+        "hash": "10426610514725810503"
+      },
+      {
+        "file": ".github/instructions/engineering.md",
+        "hash": "4812569844694144455"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/secrets/jwt.yaml",
+        "hash": "13290987171006764319"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/.DS_Store",
+        "hash": "15055992987893062681"
+      },
+      {
+        "file": "Show",
         "hash": "3244421341483603138"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/auth/service.yaml",
+        "hash": "10990448741366969475"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/functions/_helpers.tpl",
+        "hash": "10386432421385370870"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/storage/service.yaml",
+        "hash": "11645846037774581235"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/minio/service.yaml",
+        "hash": "10444166650701032560"
+      },
+      {
+        "file": "scripts/spec_lint.py",
+        "hash": "6306465704236622553"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/imgproxy/serviceaccount.yaml",
+        "hash": "2950396814334716190"
+      },
+      {
+        "file": "tests/justfile/test-doctor.sh",
+        "hash": "10746613326644121873"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/minio.yaml",
+        "hash": "11934871597376293305"
+      },
+      {
+        "file": "tests/justfile/test-validate.sh",
+        "hash": "4149731674713468661"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/storage.yaml",
+        "hash": "17202095060650341012"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/test/studio.yaml",
+        "hash": "16045045196773840009"
+      },
+      {
+        "file": "coverage/libs/nx-homelab-plugin/lcov-report/service/index.html",
+        "hash": "10212247570603646278"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/analytics/deployment.yaml",
+        "hash": "16607490837059041058"
+      },
+      {
+        "file": "LAN",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/secrets/smtp.yaml",
+        "hash": "9087665564442570393"
+      },
+      {
+        "file": "templates/structure.md",
+        "hash": "13379133436182085708"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "docs/Kubernetes/seven_must_know.md",
+        "hash": "13197283818992833872"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/kong/serviceaccount.yaml",
+        "hash": "17548881915154017407"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/minio/_helpers.tpl",
+        "hash": "13153280966421632307"
+      },
+      {
+        "file": ".github/instructions/prompts/design.prompt.md",
+        "hash": "14383135828653696411"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile",
+        "hash": "17240827428475442228"
+      },
+      {
+        "file": "templates/cookiecutter-service/{{cookiecutter.project_slug}}/Dockerfile:Zone.Identifier",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "docs/testing-strategy.md",
+        "hash": "12133498701227552781"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/vector/serviceaccount.yaml",
+        "hash": "863966896772746933"
+      },
+      {
+        "file": "templates/tech.md",
+        "hash": "14366347001970021581"
+      },
+      {
+        "file": ".github/instructions/prompts/orchestrator.prompt.md",
+        "hash": "10085955471059226587"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/values.yaml",
+        "hash": "14480137973024864828"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/storage/volume.yaml",
+        "hash": "6693515757284540839"
+      },
+      {
+        "file": "supabase-kubernetes/charts/.helmignore",
+        "hash": "9835375496508434033"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/secrets/analytics.yaml",
+        "hash": "8778860366682082081"
+      },
+      {
+        "file": ".github/instructions/security.md",
+        "hash": "1632296361030456667"
+      },
+      {
+        "file": ".github/instructions/data.md",
+        "hash": "10337019996044203506"
+      },
+      {
+        "file": ".env.example",
+        "hash": "17472014680832437757"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/storage/_helpers.tpl",
+        "hash": "4490507342925283273"
+      },
+      {
+        "file": "supabase-kubernetes/build/supabase-0.0.1.tgz",
+        "hash": "9873946188342033132"
+      },
+      {
+        "file": "tests/justfile/test-pre-merge.sh",
+        "hash": "2349199931701024229"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/realtime/deployment.yaml",
+        "hash": "13345534005980146322"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/meta/service.yaml",
+        "hash": "1775752616342277546"
+      },
+      {
+        "file": "docs/ACCESS_GUIDE.md",
+        "hash": "11616556795933827643"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/realtime/_helpers.tpl",
+        "hash": "11143553018252838296"
+      },
+      {
+        "file": "docs/traefik-fixes.md",
+        "hash": "1203648668327751253"
+      },
+      {
+        "file": "supabase-kubernetes/charts/supabase/templates/analytics/_helpers.tpl",
+        "hash": "16548474440954500616"
+      },
+      {
+        "file": "package.json",
+        "hash": "17297045043511215649"
+      },
+      {
+        "file": ".vscode/mcp.json",
+        "hash": "13804513955984507092"
       }
     ],
     "projectFileMap": {
@@ -1057,7 +1057,7 @@
         },
         {
           "file": "libs/nx-homelab-plugin/generators/vault-secret/generator.ts",
-          "hash": "1087704591308614244"
+          "hash": "1686135981350178268"
         },
         {
           "file": "libs/nx-homelab-plugin/generators/vault-secret/generator.ts:Zone.Identifier",
@@ -1097,7 +1097,7 @@
         },
         {
           "file": "libs/nx-homelab-plugin/src/index.ts",
-          "hash": "9928893189197621941"
+          "hash": "18030917114793395987"
         },
         {
           "file": "libs/nx-homelab-plugin/tsconfig.json",
