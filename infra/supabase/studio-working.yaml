@@ -73,12 +73,11 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
-    - match: Host(`studio.homestation.local`)
+    - match: Host(`studio.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-studio-working
           port: 3000
-  tls:
-    certResolver: letsencrypt
+  # HTTP for local dev

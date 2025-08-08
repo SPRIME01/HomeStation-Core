@@ -26,7 +26,7 @@ just pf_supabase  # http://localhost:30080
 # Vault UI
 just pf_vault     # http://localhost:8201
 
-# Network doctor (IngressRoutes, NodePorts, MetalLB)
+# Network doctor (IngressRoutes, NodePorts, LoadBalancers)
 just doctor_network
 ```
 
@@ -53,9 +53,8 @@ just doctor_network
 
 3. **Direct API Access (via Traefik)**
    ```bash
-   # HTTP (local dev) and HTTPS (with ACME staging)
-   curl -s http://api.supabase.homestation.local/rest/v1/ | jq .
-   curl -ks https://api.supabase.homestation.local/rest/v1/ | jq .
+   # HTTP (local dev via klipper-lb with nip.io wildcard)
+   curl -s http://api.supabase.127.0.0.1.nip.io/rest/v1/ | jq .
    ```
    - REST API: http(s)://api.supabase.homestation.local/rest/v1/
    - Auth API: http(s)://auth.supabase.homestation.local/auth/v1/
@@ -74,10 +73,10 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}
 
 ### 📡 API Endpoints (via Traefik)
 
-- **REST API**: https://api.supabase.homestation.local:32184/rest/v1/
-- **Auth API**: https://auth.supabase.homestation.local:32184/auth/v1/
-- **Storage API**: https://storage.supabase.homestation.local:32184/storage/v1/
-- **Realtime**: wss://realtime.supabase.homestation.local:32184/realtime/v1/
+- **REST API**: http://api.supabase.127.0.0.1.nip.io/rest/v1/
+- **Auth API**: http://auth.supabase.127.0.0.1.nip.io/auth/v1/
+- **Storage API**: http://storage.supabase.127.0.0.1.nip.io/storage/v1/
+- **Realtime**: ws://realtime.supabase.127.0.0.1.nip.io/realtime/v1/
 
 ## 🔐 HashiCorp Vault Access
 

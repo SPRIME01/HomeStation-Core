@@ -121,7 +121,7 @@ doctor_ui:
     @echo "   just pf_supabase   # http://localhost:30080"
     @echo "   just pf_vault      # http://localhost:8201"
 
-# 3️⃣.11 Network doctor: Traefik, MetalLB, Ingress and NodePorts overview
+# 3️⃣.11 Network doctor: Traefik, klipper-lb, Ingress and NodePorts overview
 doctor_network:
     @echo "🧪 Networking quick diagnostics"
     @echo "\n🛰️  Traefik (traefik-system)"
@@ -130,7 +130,6 @@ doctor_network:
     kubectl get ingressroutes -A || true
     @echo "\n🌐 Services with NodePorts"
     kubectl get svc -A | grep NodePort || true
-    @echo "\n🧭 MetalLB Pools & Ads"
-    kubectl get ipaddresspools.metallb.io -n metallb-system || true
-    kubectl get l2advertisements.metallb.io -n metallb-system || true
+    @echo "\n🛟 klipper-lb Services (LoadBalancer)"
+    kubectl get svc -A | grep LoadBalancer || true
 

@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
+  - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: api@internal
@@ -27,9 +27,9 @@ metadata:
   namespace: traefik-system
 spec:
   entryPoints:
-    - websecure
+  - web
   routes:
-    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
+  - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: api@internal
@@ -37,9 +37,7 @@ spec:
       # middlewares:
       #   - name: dashboard-auth
       #     namespace: traefik-system
-  # Enable when certificates are properly configured
-  # tls:
-  #   certResolver: letsencrypt
+  # HTTP only for local dev
 
 ---
 # Optional basic auth middleware for dashboard protection

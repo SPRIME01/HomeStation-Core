@@ -45,9 +45,8 @@ spec:
             port: 9000
             expose: true
         service:
-          annotations:
-            # Ensure MetalLB can allocate IP when using LoadBalancer
-            metallb.universe.tf/address-pool: homelab-pool
+          # Use LoadBalancer so Rancher Desktop's klipper-lb exposes ports on localhost
+          type: LoadBalancer
         additionalArguments:
           # Use valid email from .env for Let's Encrypt
           - "--api.dashboard=true"
