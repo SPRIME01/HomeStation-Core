@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
+    - match: HostRegexp(`traefik\\..+\\.nip\\.io`) || HostRegexp(`dashboard\\..+\\.nip\\.io`)
       kind: Rule
       services:
         - name: api@internal

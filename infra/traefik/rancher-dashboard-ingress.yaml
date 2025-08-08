@@ -8,7 +8,7 @@ spec:
   entryPoints:
   - websecure
   routes:
-  - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`localhost`)
+  - match: HostRegexp(`traefik\\..+\\.nip\\.io`) || Host(`localhost`)
       kind: Rule
       services:
         - name: api@internal
@@ -23,7 +23,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.127.0.0.1.nip.io`)
+  - match: HostRegexp(`traefik\\..+\\.nip\\.io`)
       kind: Rule
       services:
         - name: api@internal

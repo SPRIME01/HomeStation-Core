@@ -136,4 +136,7 @@ doctor_network:
     kubectl get svc -A | grep NodePort || true
     @echo "\n🛟 klipper-lb Services (LoadBalancer)"
     kubectl get svc -A | grep LoadBalancer || true
+    @echo "\n🧾 Node & nip.io helper"
+    kubectl get nodes -o wide || true
+    @echo "Use: <NODE_IP>.nip.io if 127.0.0.1 fails"
 

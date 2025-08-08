@@ -55,7 +55,9 @@ just doctor_network
 3. **Direct API Access (via Traefik)**
    ```bash
    # HTTPS (local dev via klipper-lb with nip.io wildcard)
+   # If 127.0.0.1 is refused, use your node IP (see: kubectl get nodes -o wide)
    curl -ks https://api.supabase.127.0.0.1.nip.io/rest/v1/ | jq .
+   curl -ks https://api.supabase.<NODE_IP>.nip.io/rest/v1/ | jq .
    ```
    - REST API: https://api.supabase.127.0.0.1.nip.io/rest/v1/
    - Auth API: https://auth.supabase.127.0.0.1.nip.io/auth/v1/
@@ -74,10 +76,10 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}
 
 ### 📡 API Endpoints (via Traefik)
 
-- **REST API**: https://api.supabase.127.0.0.1.nip.io/rest/v1/
-- **Auth API**: https://auth.supabase.127.0.0.1.nip.io/auth/v1/
-- **Storage API**: https://storage.supabase.127.0.0.1.nip.io/storage/v1/
-- **Realtime**: wss://realtime.supabase.127.0.0.1.nip.io/realtime/v1/
+- **REST API**: https://api.supabase.<NODE_IP>.nip.io/rest/v1/
+- **Auth API**: https://auth.supabase.<NODE_IP>.nip.io/auth/v1/
+- **Storage API**: https://storage.supabase.<NODE_IP>.nip.io/storage/v1/
+- **Realtime**: wss://realtime.supabase.<NODE_IP>.nip.io/realtime/v1/
 
 ## 🔐 HashiCorp Vault Access
 
@@ -87,7 +89,7 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}
 kubectl port-forward -n vault svc/vault 8200:8200
 ```
 
-- **URL (Ingress)**: https://vault.127.0.0.1.nip.io
+- **URL (Ingress)**: https://vault.<NODE_IP>.nip.io
 - **URL (Port-forward)**: http://localhost:8200
 - **Initial Setup**: Use root token from vault-init.json (if available)
 
