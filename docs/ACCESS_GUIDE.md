@@ -18,13 +18,13 @@ kubectl -n vault exec vault-0 -- vault status
 ```bash
 # Traefik status and routes
 just traefik_status
-just pf_traefik   # http://localhost:8082
+just pf_traefik   # http://localhost:8082 (port-forward)
 
 # Supabase Studio
-just pf_supabase  # http://localhost:30080
+just pf_supabase  # http://localhost:30080 (port-forward)
 
 # Vault UI
-just pf_vault     # http://localhost:8201
+just pf_vault     # http://localhost:8201 (port-forward)
 
 # Network doctor (IngressRoutes, NodePorts, LoadBalancers)
 just doctor_network
@@ -38,7 +38,8 @@ just doctor_network
    ```bash
    just pf_supabase
    ```
-   - URL: http://localhost:30080
+   - URL (Ingress): https://supabase.127.0.0.1.nip.io
+   - URL (Port-forward): http://localhost:30080
    - Username: admin
    - Password: homelab-admin-password
 
@@ -53,13 +54,13 @@ just doctor_network
 
 3. **Direct API Access (via Traefik)**
    ```bash
-   # HTTP (local dev via klipper-lb with nip.io wildcard)
-   curl -s http://api.supabase.127.0.0.1.nip.io/rest/v1/ | jq .
+   # HTTPS (local dev via klipper-lb with nip.io wildcard)
+   curl -ks https://api.supabase.127.0.0.1.nip.io/rest/v1/ | jq .
    ```
-   - REST API: http(s)://api.supabase.homestation.local/rest/v1/
-   - Auth API: http(s)://auth.supabase.homestation.local/auth/v1/
-   - Storage API: http(s)://storage.supabase.homestation.local/storage/v1/
-   - Realtime: ws(s)://realtime.supabase.homestation.local/realtime/v1/
+   - REST API: https://api.supabase.127.0.0.1.nip.io/rest/v1/
+   - Auth API: https://auth.supabase.127.0.0.1.nip.io/auth/v1/
+   - Storage API: https://storage.supabase.127.0.0.1.nip.io/storage/v1/
+   - Realtime: wss://realtime.supabase.127.0.0.1.nip.io/realtime/v1/
 
 ### 🔑 API Keys
 
@@ -73,10 +74,10 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}
 
 ### 📡 API Endpoints (via Traefik)
 
-- **REST API**: http://api.supabase.127.0.0.1.nip.io/rest/v1/
-- **Auth API**: http://auth.supabase.127.0.0.1.nip.io/auth/v1/
-- **Storage API**: http://storage.supabase.127.0.0.1.nip.io/storage/v1/
-- **Realtime**: ws://realtime.supabase.127.0.0.1.nip.io/realtime/v1/
+- **REST API**: https://api.supabase.127.0.0.1.nip.io/rest/v1/
+- **Auth API**: https://auth.supabase.127.0.0.1.nip.io/auth/v1/
+- **Storage API**: https://storage.supabase.127.0.0.1.nip.io/storage/v1/
+- **Realtime**: wss://realtime.supabase.127.0.0.1.nip.io/realtime/v1/
 
 ## 🔐 HashiCorp Vault Access
 
@@ -86,7 +87,8 @@ kubectl get secret supabase-secrets -n supabase -o jsonpath='{.data.service-key}
 kubectl port-forward -n vault svc/vault 8200:8200
 ```
 
-- **URL**: http://localhost:8200
+- **URL (Ingress)**: https://vault.127.0.0.1.nip.io
+- **URL (Port-forward)**: http://localhost:8200
 - **Initial Setup**: Use root token from vault-init.json (if available)
 
 ### 🔑 CLI Access
@@ -204,3 +206,22 @@ just vault_setup
 ---
 
 💡 **Tip**: Keep your `.env` file secure and never commit it to git!
+
+---
+
+## 🔐 Local TLS Setup (Traefik)
+
+To enable HTTPS for all services locally using Rancher Desktop’s klipper-lb and Traefik:
+
+1. Create a default TLS certificate (self-signed) used by Traefik’s default TLS store:
+   ```bash
+   just traefik_create_default_cert
+   ```
+   This creates `traefik-default-cert` in the `traefik-system` namespace and is referenced by the Helm values.
+
+2. Let’s Encrypt is configured in Traefik (production). ACME storage is persisted at `/data/acme.json` via the Traefik chart’s persistence settings.
+
+3. Access services over HTTPS using nip.io hostnames, for example:
+   - Traefik Dashboard: https://traefik.127.0.0.1.nip.io
+   - Vault UI: https://vault.127.0.0.1.nip.io
+   - Supabase Studio: https://supabase.127.0.0.1.nip.io

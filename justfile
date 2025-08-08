@@ -102,6 +102,10 @@ pf_traefik:
     # Forward Traefik admin port (9000) from the deployment
     kubectl -n traefik-system port-forward deploy/traefik 8082:9000
 
+# 3️⃣.9 Create default TLS cert for Traefik (self-signed for local HTTPS)
+traefik_create_default_cert:
+    bash scripts/create-traefik-default-cert.sh traefik-system traefik-default-cert
+
 # 3️⃣.9 Apply manifests to expose Supabase Studio via NodePort (optional)
 supabase_apply_working:
     kubectl apply -f infra/supabase/studio-working.yaml

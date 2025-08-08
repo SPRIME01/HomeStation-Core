@@ -35,8 +35,8 @@ spec:
             enabled: true
         ports:
           web:
-            # Keep HTTP available locally (no forced redirect)
-            redirectTo: null
+            # Redirect all HTTP to HTTPS
+            redirectTo: websecure
           websecure:
             tls:
               enabled: true
@@ -47,6 +47,10 @@ spec:
         service:
           # Use LoadBalancer so Rancher Desktop's klipper-lb exposes ports on localhost
           type: LoadBalancer
+        tlsStore:
+          default:
+            defaultCertificate:
+              secretName: traefik-default-cert
         additionalArguments:
           # Use valid email from .env for Let's Encrypt
           - "--api.dashboard=true"
@@ -54,9 +58,11 @@ spec:
           - "--certificatesresolvers.letsencrypt.acme.email=sprime01@gmail.com"
           - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
           - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-          # Enable staging for testing to avoid rate limits
-          - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
           - "--log.level=INFO"
+        persistence:
+          enabled: true
+          size: 1Gi
+          path: /data
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik-system

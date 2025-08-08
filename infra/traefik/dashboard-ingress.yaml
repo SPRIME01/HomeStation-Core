@@ -1,5 +1,5 @@
 ---
-# Traefik Dashboard IngressRoute for local access
+# Traefik Dashboard IngressRoute for local access (HTTPS)
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -7,9 +7,9 @@ metadata:
   namespace: traefik-system
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-  - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
+    - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: api@internal
@@ -17,27 +17,8 @@ spec:
       # middlewares:
       #   - name: dashboard-auth
       #     namespace: traefik-system
-
----
-# HTTPS version (when certificates are working)
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-dashboard-secure
-  namespace: traefik-system
-spec:
-  entryPoints:
-  - web
-  routes:
-  - match: Host(`traefik.127.0.0.1.nip.io`) || Host(`dashboard.127.0.0.1.nip.io`)
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
-      # middlewares:
-      #   - name: dashboard-auth
-      #     namespace: traefik-system
-  # HTTP only for local dev
+  tls:
+    certResolver: letsencrypt
 
 ---
 # Optional basic auth middleware for dashboard protection

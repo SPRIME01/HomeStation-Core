@@ -26,13 +26,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`supabase.127.0.0.1.nip.io`) || Host(`studio.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-studio-working
           port: 3000
+  tls:
+    certResolver: letsencrypt
   # HTTP for local dev
 
 ---
@@ -59,13 +61,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`api.supabase.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-supabase-rest
           port: 3000
+  tls:
+    certResolver: letsencrypt
   # HTTP only for local
 
 ---
@@ -92,13 +96,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`auth.supabase.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-supabase-auth
           port: 9999
+  tls:
+    certResolver: letsencrypt
   # HTTP only for local
 
 ---
@@ -125,13 +131,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`realtime.supabase.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-supabase-realtime
           port: 4000
+  tls:
+    certResolver: letsencrypt
   # HTTP only for local
 
 ---
@@ -158,13 +166,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`storage.supabase.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-supabase-storage
           port: 5000
+  tls:
+    certResolver: letsencrypt
   # HTTP only for local
 
 ---
@@ -191,11 +201,13 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`meta.supabase.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: supabase-supabase-meta
           port: 8080
+  tls:
+    certResolver: letsencrypt
   # HTTP only for local

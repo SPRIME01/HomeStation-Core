@@ -7,14 +7,15 @@ metadata:
   namespace: traefik-system
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`traefik.127.0.0.1.nip.io`)
       services:
         - name: api@internal
           kind: TraefikService
-  # Local dev via HTTP; TLS handled externally if needed
+  tls:
+    certResolver: letsencrypt
 ---
 # Production IngressRoute for Supabase Studio
 apiVersion: traefik.containo.us/v1alpha1
@@ -24,14 +25,15 @@ metadata:
   namespace: supabase
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`supabase.127.0.0.1.nip.io`)
       services:
         - name: supabase-studio-working
           port: 3000
-  # Local dev via HTTP
+  tls:
+    certResolver: letsencrypt
 ---
 # Production IngressRoute for Vault UI
 apiVersion: traefik.containo.us/v1alpha1
@@ -41,11 +43,12 @@ metadata:
   namespace: vault
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`vault.127.0.0.1.nip.io`)
       services:
         - name: vault-ui
           port: 8200
-  # Local dev via HTTP
+  tls:
+    certResolver: letsencrypt
