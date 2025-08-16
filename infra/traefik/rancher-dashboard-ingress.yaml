@@ -3,12 +3,12 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: traefik-dashboard
-  namespace: kube-system
+  namespace: traefik-system
 spec:
   entryPoints:
-    - web
+  - websecure
   routes:
-    - match: Host(`traefik.homelab.primefam.cloud`) || Host(`localhost`)
+  - match: HostRegexp(`traefik\\..+\\.(nip\\.io|sslip\\.io)`) || Host(`localhost`)
       kind: Rule
       services:
         - name: api@internal
@@ -18,12 +18,12 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: traefik-dashboard-secure
-  namespace: kube-system
+  namespace: traefik-system
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.homelab.primefam.cloud`)
+  - match: HostRegexp(`traefik\\..+\\.(nip\\.io|sslip\\.io)`)
       kind: Rule
       services:
         - name: api@internal

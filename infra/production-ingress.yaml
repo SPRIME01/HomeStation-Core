@@ -4,19 +4,18 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: traefik-dashboard-prod
-  namespace: kube-system
+  namespace: traefik-system
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`traefik.homelab.primefam.cloud`)
+      match: HostRegexp(`traefik\..+\.(nip\.io|sslip\.io)`) || Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
       services:
         - name: api@internal
           kind: TraefikService
   tls:
     certResolver: letsencrypt
----
 # Production IngressRoute for Supabase Studio
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -28,13 +27,12 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`supabase.homelab.primefam.cloud`)
+      match: HostRegexp(`supabase\..+\.(nip\.io|sslip\.io)`) || Host(`supabase.homestation.local`)
       services:
         - name: supabase-studio-working
           port: 3000
   tls:
     certResolver: letsencrypt
----
 # Production IngressRoute for Vault UI
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -46,7 +44,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`vault.homelab.primefam.cloud`)
+      match: HostRegexp(`vault\..+\.(nip\.io|sslip\.io)`) || Host(`vault.homestation.local`)
       services:
         - name: vault-ui
           port: 8200

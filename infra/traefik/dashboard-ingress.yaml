@@ -1,5 +1,5 @@
 ---
-# Traefik Dashboard IngressRoute for local access
+# Traefik Dashboard IngressRoute for local access (HTTPS)
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -7,30 +7,27 @@ metadata:
   namespace: traefik-system
 spec:
   entryPoints:
-    - web
-  routes:
-    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
-
----
-# HTTPS version (when certificates are working)
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-dashboard-secure
-  namespace: traefik-system
-spec:
-  entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
+    - match: HostRegexp(`traefik\\..+\\.(nip\\.io|sslip\\.io)`) || HostRegexp(`dashboard\\..+\\.(nip\\.io|sslip\\.io)`)
       kind: Rule
       services:
         - name: api@internal
           kind: TraefikService
-  # Enable when certificates are properly configured
-  # tls:
-  #   certResolver: letsencrypt
+      # middlewares:
+      #   - name: dashboard-auth
+      #     namespace: traefik-system
+  tls:
+    certResolver: letsencrypt
+
+---
+# Optional basic auth middleware for dashboard protection
+# kubectl -n traefik-system create secret generic dashboard-auth-secret --from-file=users=./usersfile
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-auth
+  namespace: traefik-system
+spec:
+  basicAuth:
+    secret: dashboard-auth-secret

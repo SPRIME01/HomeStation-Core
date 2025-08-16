@@ -151,7 +151,7 @@ nx g @org/nx-homelab-plugin:vault-secret name=secret # Generate Vault policy
 ### Adding New Services
 1. Generate service: `nx g @org/nx-homelab-plugin:service name=my-api`
 2. Generate ArgoCD app: `nx g @org/nx-homelab-plugin:argo-app name=my-api`
-3. Validate: `just validate`
+3. Validate: `just    validate`
 4. Deploy: Apply generated manifests with kubectl/ArgoCD
 
 ### Code Changes
