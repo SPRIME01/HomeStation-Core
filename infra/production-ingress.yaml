@@ -10,11 +10,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: HostRegexp(`traefik\..+\.nip\.io`)
+      match: HostRegexp(`traefik\..+\.(nip\.io|sslip\.io)`) || Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
       services:
         - name: api@internal
           kind: TraefikService
-    match: HostRegexp(`traefik\..+\.nip\.io`) || Host(`traefik.homestation.local`) || Host(`dashboard.homestation.local`)
   tls:
     certResolver: letsencrypt
 # Production IngressRoute for Supabase Studio
@@ -28,11 +27,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: HostRegexp(`supabase\..+\.nip\.io`)
+      match: HostRegexp(`supabase\..+\.(nip\.io|sslip\.io)`) || Host(`supabase.homestation.local`)
       services:
         - name: supabase-studio-working
           port: 3000
-    match: HostRegexp(`supabase\..+\.nip\.io`) || Host(`supabase.homestation.local`)
   tls:
     certResolver: letsencrypt
 # Production IngressRoute for Vault UI
@@ -46,10 +44,9 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: HostRegexp(`vault\..+\.nip\.io`)
+      match: HostRegexp(`vault\..+\.(nip\.io|sslip\.io)`) || Host(`vault.homestation.local`)
       services:
         - name: vault-ui
           port: 8200
-    match: HostRegexp(`vault\..+\.nip\.io`) || Host(`vault.homestation.local`)
   tls:
     certResolver: letsencrypt

@@ -1,4 +1,19 @@
 {
     "chat.promptFiles": true,
-    "nxConsole.generateAiAgentRules": true
+    "nxConsole.generateAiAgentRules": true,
+    // Ensure VS Code uses zsh and launches it as interactive + login
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/usr/bin/zsh",
+            "args": [
+                "-l",
+                "-i"
+            ]
+        }
+    },
+    // Clear any legacy args that could conflict
+    "terminal.integrated.shellArgs.linux": [],
+    // For older VS Code versions where this is still considered
+    "terminal.integrated.loginShell": false
 }
